@@ -2,20 +2,22 @@ import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { Provider } from 'react-redux'
+import { AnimatePresence } from "framer-motion";
 
 import React from "react";
-import { store } from './../redux/store';
+import { GlobalProvider } from "../context/Provider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <React.StrictMode>
-      <Provider store={store}>
-        <Head>
-          <title>Thankful Notes</title>
-        </Head>
-        <Component {...pageProps} />
-        </Provider>
+      <GlobalProvider>
+        <AnimatePresence exitBeforeEnter>
+          <Head>
+            <title>Thankful Notes</title>
+          </Head>
+          <Component {...pageProps} />
+        </AnimatePresence>
+      </GlobalProvider>
     </React.StrictMode>
   );
 }

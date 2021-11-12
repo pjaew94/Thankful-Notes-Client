@@ -1,11 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400&display=swap');
 
 @layer base {
   body {
-    @apply overflow-x-hidden;
+    @apply overflow-x-hidden text-black;
   }
+
+
+  @font-face {
+    font-family: "Etelka Hairline Pro";
+    src: url("./fonts/EtelkaHairlinePro.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Helvetica Bold";
+    src: url("./fonts/Helvetica-Bold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Arkit Light";
+    src: url("./fonts/Arkit-Light.otf") format("opentype");
+  }
+  @font-face {
+    font-family: "Shapiro";
+    src: url("./fonts/Shapiro35.otf") format("opentype");
+  }
+
+  
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 

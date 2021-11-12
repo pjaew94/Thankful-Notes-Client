@@ -1,4 +1,4 @@
-export enum ActionType {
+export enum AuthActionType {
     LOGIN_SUCCESS = 'LOGIN_SUCCESS',
     LOGIN_FAIL = 'LOGIN_FAIL',
     LOGOUT = 'LOGOUT',
@@ -11,4 +11,14 @@ export enum ActionType {
 
     SET_ALERT = 'SET_ALERT',
     REMOVE_ALERT = 'REMOVE_ALERT'
+}
+
+export enum MessageActionType {
+    GET_MESSAGE_SUCCESS = 'GET_MESSAGE_SUCCESS',
+    GET_MESSAGE_FAIL = 'GET_MESSAGE_FAIL'
+}
+
+export enum LanguageActionType { 
+    SET_ENGLISH = 'SET_ENGLISH',
+    SET_KOREAN = 'SET_KOREAN',
 }

@@ -1,7 +1,8 @@
+
 const Dashboard: React.FC = () => {
     return (
         <div>
-            
+            dashboard
         </div>
     )
 }
