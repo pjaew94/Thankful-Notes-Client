@@ -7,7 +7,7 @@ module.exports = {
       logo: ["Etelka Hairline Pro", "sans-serif"],
       light: ["Arkit Light", "sans-serif"],
       kor: ['Gothic A1', "sans-serif"],
-      sans: ["Helvetica Bold", 'sans-serif'],
+      sans: ["Helvetica", 'sans-serif'],
       serif: ["Shapiro", "sans-serif"]
     },
     extend: {

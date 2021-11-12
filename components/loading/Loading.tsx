@@ -22,7 +22,7 @@ const Loading: React.FC = () => {
       >
         <BouncyBall />
         <Logo size="large" />
-        <Brand size="large" />
+        <Brand />
       </motion.div>
     </motion.div>
   );

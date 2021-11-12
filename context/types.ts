@@ -13,7 +13,8 @@ export interface IAuthState {
     age: number;
     email: string;
     date_joined: string;
-  } | null;
+  } | null,
+  error: string | null
 }
 
 interface IRegisterLoginSuccess {

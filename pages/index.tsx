@@ -5,7 +5,6 @@ import { useEffect, useContext } from "react";
 import { loadUser } from "../context/actions/auth";
 import { loadUserCallBack } from "../context/call-backs";
 import { GlobalContext } from "./../context/Provider";
-import { setAuthToken } from "./../context/call-backs/index";
 import Loading from "../components/loading/Loading";
 
 const Home: NextPage = () => {
@@ -14,8 +13,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (localStorage.token) {
-      setAuthToken(localStorage.token);
-      loadUserCallBack()
+      loadUserCallBack(localStorage.token)
         .then((userData) => {
           loadUser(userData)(authDispatch);
         })

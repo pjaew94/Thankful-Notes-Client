@@ -11,13 +11,14 @@ export const auth =(state: IAuthState, action:IAuthAction): IAuthState => {
     switch (type) {
         case AuthActionType.REGISTER_SUCCESS:
         case AuthActionType.LOGIN_SUCCESS:
-          localStorage.setItem("token", payload.token);
+          localStorage.setItem("token", payload);
     
           return {
             ...state,
-            ...payload,
+            token: payload,
             isAuthenticated: true,
             loading: false,
+            error: null
           };
         case AuthActionType.REGISTER_FAIL:
         case AuthActionType.AUTH_ERROR:
@@ -29,6 +30,7 @@ export const auth =(state: IAuthState, action:IAuthAction): IAuthState => {
             token: null,
             isAuthenticated: false,
             loading: false,
+            error: payload
           };
         case AuthActionType.USER_LOADED:
           return {
@@ -36,6 +38,7 @@ export const auth =(state: IAuthState, action:IAuthAction): IAuthState => {
             isAuthenticated: true,
             loading: false,
             user: payload,
+            error: null
           };
     
         default:

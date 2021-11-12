@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import LanguageDropdown from "../languageToggle/LanguageDropdown";
 import Text from "../reusables/Text";
-import Brand from "../brand/Brand";
 import LoginForm from "./LoginForm";
+import LogoLink from './../brand/LogoLink';
+import Link from 'next/link'
+import { GlobalContext } from "../../context/Provider";
 
 
 
@@ -11,11 +13,13 @@ const LoginContent: React.FC = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  const {authState} = useContext(GlobalContext)
+
 
   return (
     <div className="flex flex-col w-full min-h-full p-10">
         <div className='flex w-full justify-between items-center'>
-            <Brand size="small" />
+            <LogoLink />
             <LanguageDropdown />
         </div>
         
@@ -29,10 +33,15 @@ const LoginContent: React.FC = () => {
         {/* Actual form fields and content */}
         <LoginForm />
 
-      {/* Submit */}
-
 
       {/* Links to Register/WhatIsThisSite */}
+        <div className='w-full flex flex-wrap mt-5'>
+          <Text type='h4' textEng='New to Thankful Notes?' textKor='세로운 유저 인가요?' />
+          <Link href='/register'>
+            <a><Text type='h4' textEng='Register' textKor='등록' customStyles='text-hotPink ml-2' /></a>
+          </Link>
+        </div>
+        <button onClick={() => console.log(authState)}>TEST CLICK</button>
     </div>
   );
 };

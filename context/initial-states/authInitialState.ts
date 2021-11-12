@@ -5,7 +5,8 @@ const authInitialState:IAuthState = {
         token: null,
         isAuthenticated: false,
         loading: true,
-        user: null
+        user: null,
+        error: null
     
 }
 
