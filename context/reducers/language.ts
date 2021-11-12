@@ -9,10 +9,12 @@ export const language = (state: ILanguageState, action: ILanguageAction): ILangu
     switch(type){
         case LanguageActionType.SET_ENGLISH:
             return {
+                ...state,
                 korean: false
             }
         case LanguageActionType.SET_KOREAN:
             return {
+                ...state,
                 korean: true
             }
             default:

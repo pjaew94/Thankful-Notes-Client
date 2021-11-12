@@ -13,8 +13,14 @@ export const fadeUpVariant = {
         }
     },
     exit: {
-        y: -20,
-        opacity: 0
+        y: 30,
+        opacity: 0,
+        transition: {
+            type: "spring",
+            duration: 0.8,
+            bounce: 0,
+        }
     }
 }
+
 

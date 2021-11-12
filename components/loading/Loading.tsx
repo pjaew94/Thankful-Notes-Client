@@ -6,7 +6,13 @@ import BouncyBall from "./BouncyBall";
 
 const Loading: React.FC = () => {
   return (
-    <div className="h-screen w-screen flex bg-pink justify-center items-center">
+    <motion.div
+      className="h-screen w-screen flex bg-pink justify-center items-center"
+      exit={{
+        background: "white",
+        transition: { type: "spring", duration: 0.8, bounce: 0 },
+      }}
+    >
       <motion.div
         className="flex justify-between flex-col items-center relative"
         variants={fadeUpVariant}
@@ -15,10 +21,10 @@ const Loading: React.FC = () => {
         exit="exit"
       >
         <BouncyBall />
-        <Logo />
-        <Brand />
+        <Logo size="large" />
+        <Brand size="large" />
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

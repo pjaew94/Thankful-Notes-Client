@@ -1,11 +1,16 @@
 import { NextPage } from "next"
-import Logo from "../components/brand/Logo"
+
+import LoginForm from '../components/auth/LoginContent';
+
 
 const Login: NextPage = () => {
+
+
     return (
-        <div>
-            <Logo />
-            
+        <div className='min-h-screen w-screen'>
+            <LoginForm />
+
+      
         </div>
     )
 }

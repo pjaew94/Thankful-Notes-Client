@@ -6,18 +6,21 @@ import { AnimatePresence } from "framer-motion";
 
 import React from "react";
 import { GlobalProvider } from "../context/Provider";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <React.StrictMode>
-      <GlobalProvider>
-        <AnimatePresence exitBeforeEnter>
+        <GlobalProvider>
+      <AnimatePresence exitBeforeEnter>
           <Head>
             <title>Thankful Notes</title>
           </Head>
-          <Component {...pageProps} />
-        </AnimatePresence>
-      </GlobalProvider>
+          <Component {...pageProps} key={router.route} />
+      </AnimatePresence>
+        </GlobalProvider>
     </React.StrictMode>
   );
 }

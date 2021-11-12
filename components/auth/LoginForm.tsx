@@ -1,8 +1,21 @@
+import { useForm } from "react-hook-form";
+
+interface ILoginForm {
+    email: string;
+    password: string;
+  }
+
 const LoginForm: React.FC = () => {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },  
+      } = useForm<ILoginForm>();
     return (
-        <div>
+        <form className='flex flex-col w-full'>
             
-        </div>
+        </form>
     )
 }
 
