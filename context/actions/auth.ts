@@ -23,12 +23,16 @@ export const loadUser = () => async (dispatch: CallableFunction) => {
       type: AuthActionType.USER_LOADED,
       payload: userData.data,
     });
+
+
   } catch (err) {
     console.log(err);
-    dispatch({
-      type: AuthActionType.AUTH_ERROR,
-      payload: null,
-    });
+    // dispatch({
+    //   type: AuthActionType.AUTH_ERROR,
+    //   payload: null,
+    // });
+
+
   }
 };
 
@@ -40,29 +44,28 @@ export const login =
         "Content-Type": "application/json",
       },
     };
-
     const body = JSON.stringify({ email, password });
-
     try {
       const res = await axios.post(
         `http://localhost:5000/api/user/login`,
         body,
         config
       );
-
       const token = res.data.token;
-
       await dispatch({
         type: AuthActionType.LOGIN_SUCCESS,
         payload: token,
       });
 
+
     } catch (err: any) {
       console.log(err.response);
-      dispatch({
+     dispatch({
         type: AuthActionType.LOGIN_FAIL,
         payload: err.response.data,
       });
+
+
     }
   };
 
@@ -94,6 +97,13 @@ export const register =
       });
     }
   };
+
+  export const removeWarning = () => async(dispatch: CallableFunction) => {
+    dispatch({
+      type: AuthActionType.REMOVE_WARNING,
+      payload: null
+    })
+  }
 
 export const logout = async () => async (dispatch: CallableFunction) => {
   dispatch({

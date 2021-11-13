@@ -12,23 +12,20 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.token) {
-      loadUserCallBack(localStorage.token)
-        .then((userData) => {
-          loadUser(userData)(authDispatch);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    setTimeout(() => {
-      if (authState?.isAuthenticated) {
-        router.push("/dashboard");
-      } else {
-        router.push("/login");
-      }
-    }, 2000);
+    
+  const homeLoadUser = async( ) => {
+    await loadUser()(authDispatch);
+      setTimeout(() => {
+        if (authState?.isAuthenticated) {
+          router.push("/dashboard");
+        } else {
+          router.push("/login");
+        }
+      }, 2000);
+  }
+  
+    homeLoadUser()
+ 
   }, [authDispatch, authState?.isAuthenticated, router]);
 
   return <Loading />;

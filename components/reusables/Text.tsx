@@ -3,7 +3,7 @@ import { GlobalContext } from "../../context/Provider"
 
 const styles = {
     h1: '',
-    h2: 'font-sans text-6xl font-bold',
+    h2: 'font-sans text-5xl font-bold',
     h3: '',
     h4: 'font-serif text-gray-500',
     p: '',

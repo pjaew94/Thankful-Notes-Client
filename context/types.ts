@@ -1,5 +1,10 @@
 import { AuthActionType, LanguageActionType, MessageActionType } from "./action-types";
 
+export interface IError {
+  eng: string,
+  kor: string
+}
+
 export interface IAuthState {
   token: string | null;
   isAuthenticated: boolean;
@@ -14,12 +19,13 @@ export interface IAuthState {
     email: string;
     date_joined: string;
   } | null,
-  error: string | null
+  error: IError | null
 }
 
 interface IRegisterLoginSuccess {
   type: AuthActionType.REGISTER_SUCCESS | AuthActionType.LOGIN_SUCCESS;
   payload: any;
+
 }
 interface IRegisterFailAuthErrorLoginFailLogout {
   type:
@@ -27,17 +33,22 @@ interface IRegisterFailAuthErrorLoginFailLogout {
     | AuthActionType.AUTH_ERROR
     | AuthActionType.LOGIN_FAIL
     | AuthActionType.LOGOUT;
-  payload: null;
+  payload: string;
 }
 interface IUserLoaded {
   type: AuthActionType.USER_LOADED;
   payload: IAuthState["user"];
 }
 
+interface IRemoveWarning {
+  type: AuthActionType.REMOVE_WARNING
+  payload: null
+}
+
 export type IAuthAction =
   | IRegisterLoginSuccess
   | IRegisterFailAuthErrorLoginFailLogout
-  | IUserLoaded;
+  | IUserLoaded | IRemoveWarning
 
 export interface IRegisterForm {
   username: string;

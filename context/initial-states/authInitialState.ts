@@ -1,7 +1,6 @@
 import { IAuthState } from '../types';
 
 const authInitialState:IAuthState = {
-
         token: null,
         isAuthenticated: false,
         loading: true,

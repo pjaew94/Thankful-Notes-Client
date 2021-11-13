@@ -13,14 +13,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <React.StrictMode>
-        <GlobalProvider>
       <AnimatePresence exitBeforeEnter>
+        <GlobalProvider>
           <Head>
             <title>Thankful Notes</title>
           </Head>
           <Component {...pageProps} key={router.route} />
-      </AnimatePresence>
         </GlobalProvider>
+      </AnimatePresence>
     </React.StrictMode>
   );
 }

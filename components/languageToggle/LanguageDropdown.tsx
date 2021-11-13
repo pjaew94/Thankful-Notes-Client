@@ -5,7 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import { switchLanguage } from "./../../context/actions/language";
 import { Transition } from "@headlessui/react";
 
-const LanguageDropdown = () => {
+const LanguageDropdown:React.FC<{customStyles?: string}> = ({customStyles}) => {
   const { languageState, languageDispatch } = useContext(GlobalContext);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -15,10 +15,11 @@ const LanguageDropdown = () => {
   };
 
   return (
-    <div className="relative inline-block text-center">
+    <div className={`${customStyles}`}>
+    <div className={`relative inline-block text-center`}>
       {/* Button to change Dropdown */}
       <button
-        className="flex items-center xl:group focus:outline-none px-2 py-2"
+        className="flex items-center group xl:group focus:outline-none px-2 py-2"
         onClick={() => setShowDropdown(!showDropdown)}
       >
         <Text
@@ -65,6 +66,7 @@ const LanguageDropdown = () => {
           </button>
         </div>
       </Transition>
+    </div>
     </div>
   );
 };

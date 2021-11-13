@@ -9,8 +9,7 @@ export enum AuthActionType {
     REGISTER_SUCCESS = 'REGISTER_SUCCESS',
     REGISTER_FAIL = 'REGISTER_FAIL',
 
-    SET_ALERT = 'SET_ALERT',
-    REMOVE_ALERT = 'REMOVE_ALERT'
+    REMOVE_WARNING = 'REMOVE_WARNING'
 }
 
 export enum MessageActionType {

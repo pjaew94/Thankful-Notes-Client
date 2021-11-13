@@ -25,6 +25,7 @@ export const auth =(state: IAuthState, action:IAuthAction): IAuthState => {
         case AuthActionType.LOGIN_FAIL:
         case AuthActionType.LOGOUT:
           localStorage.removeItem("token");
+          console.log(payload)
           return {
             ...state,
             token: null,
@@ -40,6 +41,11 @@ export const auth =(state: IAuthState, action:IAuthAction): IAuthState => {
             user: payload,
             error: null
           };
+        case AuthActionType.REMOVE_WARNING:
+          return {
+            ...state,
+            error: null
+          }
     
         default:
           return state;

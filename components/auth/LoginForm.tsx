@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../context/actions/auth";
 import { GlobalContext } from "../../context/Provider";
 import FormSubmitButton from "../reusables/FormSubmitButton";
 import Text from "./../reusables/Text";
-import { loadUser } from './../../context/actions/auth';
-
+import { loadUser } from "./../../context/actions/auth";
+import { useRouter } from "next/router";
 
 export interface ILoginForm {
   email: string;
@@ -13,29 +13,49 @@ export interface ILoginForm {
 }
 
 const LoginForm: React.FC = () => {
-  const { authState,languageState, authDispatch } = useContext(GlobalContext);
+  const { authState, languageState, authDispatch } = useContext(GlobalContext);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ILoginForm>();
 
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    if (authState!.error) {
+      setIsLoading(false);
+      reset();
+    }
+  }, [authState, reset]);
+
   const onSubmit = async (data: ILoginForm) => {
-
-        setIsLoading(true);
-        await login(data.email, data.password)(authDispatch);
-        await loadUser()(authDispatch)
-        setIsLoading(false);
-
-
+    setIsLoading(true);
+    await login(data.email, data.password)(authDispatch);
+    await loadUser()(authDispatch);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full md:items-center md:bg-white md:px-10 md:py-10 md:rounded-lg md:my-10 md:shadow-lg">
+      {/* Greet Text */}
+      <div className="flex flex-col justify-between mt-10 mb-10 md:items-center">
+        <Text
+          type="h2"
+          textEng="Welcome Back"
+          textKor="로그인"
+          customStyles="mb-2"
+        />
+        <Text
+          type="h4"
+          textEng="What were you thankful for today?"
+          textKor="오들은 무엇이 감사했나요?"
+          customStyles="text-gray-400"
+        />
+      </div>
 
-        {/* Email Input */}
+      {/* Email Input */}
       <div className="flex flex-col w-full mb-6">
         <div className="flex mb-2">
           <Text
@@ -86,7 +106,7 @@ const LoginForm: React.FC = () => {
             required: "Please include your password.",
           })}
           name="password"
-          type='password'
+          type="password"
           placeholder={
             languageState.korean ? "죄소 8자 이상" : "at least 8 characters"
           }
@@ -100,12 +120,7 @@ const LoginForm: React.FC = () => {
       </div>
 
       {/* Submit button */}
-      <FormSubmitButton 
-        loading={isLoading}
-        value="Login"
-      />
-
-
+      <FormSubmitButton loading={isLoading} value="Login" />
     </form>
   );
 };
