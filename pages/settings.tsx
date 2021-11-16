@@ -1,6 +1,6 @@
-import type { NextPage } from 'next'
 
-const Settings: NextPage = () => {
+
+const Settings = () => {
     return (
         <div>
             

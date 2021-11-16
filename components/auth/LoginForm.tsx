@@ -120,7 +120,7 @@ const LoginForm: React.FC = () => {
       </div>
 
       {/* Submit button */}
-      <FormSubmitButton loading={isLoading} value="Login" />
+      <FormSubmitButton loading={isLoading} textEng='Login' textKor='로그인' />
     </form>
   );
 };

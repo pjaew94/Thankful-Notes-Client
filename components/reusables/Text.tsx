@@ -4,9 +4,9 @@ import { GlobalContext } from "../../context/Provider"
 const styles = {
     h1: '',
     h2: 'font-sans text-5xl font-bold',
-    h3: '',
+    h3: 'font-sans text-4xl font-bold',
     h4: 'font-serif text-gray-500',
-    p: '',
+    p: 'text-sm',
     span: '',
     label: 'font-serif',
     button: 'font-sans text-xl font-bold',
@@ -15,9 +15,9 @@ const styles = {
 
 interface IText {
     type: "h1"| "h2" | "h3" | "h4" | "p" | "span" | "label" | "button",
-    textEng: string,
-    textKor: string,
-    customStyles?: string
+    textEng: string | React.ReactNode,
+    textKor: string | React.ReactNode,
+    customStyles?: string,
 }
 
 const Text:React.FC<IText> = ({type, textEng, textKor, customStyles}) => {

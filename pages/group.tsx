@@ -1,8 +1,6 @@
 const Group: React.FC = () => {
     return (
-        <div>
-            
-        </div>
+        <></>
     )
 }
 

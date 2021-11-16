@@ -1,6 +1,8 @@
 import axios from "axios";
+import { IRegisterFormData2 } from "../../components/auth/RegisterFormPt2";
+import { IData } from "../../pages/register";
 import { AuthActionType } from "../action-types";
-import { IAuthState, IRegisterForm } from "../types";
+import { IRegisterFormData3 } from "./../../components/auth/RegisterFormPt3";
 
 const setAuthToken = (token: string): void => {
   if (token) {
@@ -11,28 +13,24 @@ const setAuthToken = (token: string): void => {
 };
 
 export const loadUser = () => async (dispatch: CallableFunction) => {
+
+  console.log(localStorage)
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
-    const userData = await axios.get(
-      `http://localhost:5000/api/user`
-    );
+    const userData = await axios.get(`http://localhost:5000/api/user`);
 
     dispatch({
       type: AuthActionType.USER_LOADED,
       payload: userData.data,
     });
-
-
   } catch (err) {
     console.log(err);
     // dispatch({
     //   type: AuthActionType.AUTH_ERROR,
     //   payload: null,
     // });
-
-
   }
 };
 
@@ -56,54 +54,132 @@ export const login =
         type: AuthActionType.LOGIN_SUCCESS,
         payload: token,
       });
-
-
     } catch (err: any) {
       console.log(err.response);
-     dispatch({
+      dispatch({
         type: AuthActionType.LOGIN_FAIL,
         payload: err.response.data,
       });
+    }
+  };
+
+export const secondStepRegistrationCheckPoint =
+  (data: IRegisterFormData2) =>
+  async (dispatch: CallableFunction): Promise<"success" | "error"> => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = JSON.stringify({ data });
+
+    try {
+      await axios.post(
+        `http://localhost:5000/api/user/check-auth-section`,
+        body,
+        config
+      );
+
+      return "success";
+    } catch (err: any) {
+      await dispatch({
+        type: AuthActionType.REGISTER_FAIL,
+        payload: err.response.data,
+      });
+      return "error";
+    }
+  };
+
+export const checkIfGroupExists =
+  (data: IRegisterFormData3, groupOption: "join" | "create") =>
+  async (
+    dispatch: CallableFunction
+  ): Promise<"success" | "error" | undefined> => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
 
+    const body = JSON.stringify({ data });
+ 
+    if (groupOption === "join") {
+      try {
+        await axios.post(
+          "http://localhost:5000/api/user/check-group-join",
+          body,
+          config
+        );
+
+        return "success";
+      } catch (err: any) {
+        await dispatch({
+          type: AuthActionType.REGISTER_FAIL,
+          payload: err.response.data,
+        });
+        return "error";
+      }
+    }
+    if (groupOption === "create") {
+      try {
+        await axios.post(
+          "http://localhost:5000/api/group/",
+          body,
+          config
+        );
+        return "success";
+      } catch (err: any) {
+        await dispatch({
+          type: AuthActionType.REGISTER_FAIL,
+          payload: err.response.data,
+        });
+        return "error";
+      }
     }
   };
 
 export const register =
-  async (data: IRegisterForm) => async (dispatch: CallableFunction) => {
+  (data: IData) => async (dispatch: CallableFunction): Promise<"success" | "error"> => {
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
     const body = JSON.stringify({ data });
-    console.log(body);
+
+    console.log(body)
 
     try {
-      const userToken = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL!}/api/user`,
+      const res = await axios.post(
+        `http://localhost:5000/api/user`,
         body,
         config
       );
+      console.log(res)
       await dispatch({
         type: AuthActionType.REGISTER_SUCCESS,
-        payload: userToken,
+        payload: res.data.token,
       });
-    } catch (err) {
-      console.log(err);
+
+      return "success";
+    } catch (err: any) {
       await dispatch({
         type: AuthActionType.REGISTER_FAIL,
-        payload: null,
+        payload: err.response.data,
       });
+
+      return "error"
     }
   };
 
-  export const removeWarning = () => async(dispatch: CallableFunction) => {
-    dispatch({
-      type: AuthActionType.REMOVE_WARNING,
-      payload: null
-    })
-  }
+export const removeWarning = () => async (dispatch: CallableFunction) => {
+  dispatch({
+    type: AuthActionType.REMOVE_WARNING,
+    payload: null,
+  });
+};
 
 export const logout = async () => async (dispatch: CallableFunction) => {
   dispatch({
