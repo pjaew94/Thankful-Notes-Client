@@ -5,7 +5,7 @@ const styles = {
     h1: '',
     h2: 'font-sans text-5xl font-bold',
     h3: 'font-sans text-4xl font-bold',
-    h4: 'font-serif text-gray-500',
+    h4: 'font-serif',
     p: 'text-sm',
     span: '',
     label: 'font-serif',

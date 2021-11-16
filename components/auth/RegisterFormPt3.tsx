@@ -25,6 +25,7 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
   setData,
   languageState,
   registerUser,
+
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [groupOption, setGroupOption] = useState<IGroupOptions>("join");
@@ -35,20 +36,18 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
+    reset
   } = useForm<IRegisterFormData3>();
 
-  const watchUniqueGroupName = watch('unique_group_name')
-
+  const watchUniqueGroupName = watch("unique_group_name");
 
   useEffect(() => {
-    setData({...data, unique_group_name: watchUniqueGroupName})
-
-  }, [watch, watchUniqueGroupName, data, setData])
+    setData({ ...data, unique_group_name: watchUniqueGroupName });
+  }, [watch, watchUniqueGroupName]);
 
   const onSubmit = async (formData: IRegisterFormData3) => {
     setIsLoading(true);
-
 
     if (groupOption === "join") {
       const res = await checkIfGroupExists(formData, "join")(authDispatch);
@@ -62,6 +61,11 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
         registerUser();
       }
     }
+    if(groupOption === 'alone') {
+      reset();
+      setData({...data, unique_group_name: null})
+      registerUser();
+    }
     setIsLoading(false);
   };
 
@@ -73,91 +77,30 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
         groupOption={groupOption}
       />
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* unique_group_name Input */}
-        {groupOption === "join" && (
-          <div className="flex flex-col w-full mb-6">
-            <div className="flex mb-2">
-              <Text
-                type="label"
-                textEng="Group name you wish to join:"
-                textKor="가입하고 싶은 그룹명"
-                customStyles="text-gray-500"
-              />
-            </div>
-            <input
-              className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
-              {...register("unique_group_name", {
-                required: "Make sure to include the group name.",
-              })}
-              name="unique_group_name"
-              placeholder={languageState.korean ? "BestThanker" : "PrisonMike"}
-            />
-            <Text
-              type="p"
-              textEng={
-                errors!.unique_group_name
-                  ? errors.unique_group_name.message!
-                  : ""
-              }
-              textKor={
-                errors!.unique_group_name
-                  ? errors.unique_group_name.message!
-                  : ""
-              }
-              customStyles="text-hotPink"
-            />
-          </div>
-        )}
-
-        {groupOption === "create" && (
-          <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col md:min-h-[300px] md:justify-between"
+      >
+        <div>
+          {/* unique_group_name Input */}
+          {groupOption === "join" && (
             <div className="flex flex-col w-full mb-6">
               <div className="flex mb-2">
                 <Text
                   type="label"
-                  textEng="Name of your new group:"
+                  textEng="Group name you wish to join:"
                   textKor="가입하고 싶은 그룹명"
                   customStyles="text-gray-500"
                 />
               </div>
               <input
                 className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
-                {...register("group_name", {
-                  required: "Make sure to include the group name.",
-                })}
-                name="group_name"
-                placeholder={
-                  languageState.korean ? "Best Group Ever" : "Best Group Ever"
-                }
-              />
-              <Text
-                type="p"
-                textEng={errors!.group_name ? errors.group_name.message! : ""}
-                textKor={errors!.group_name ? errors.group_name.message! : ""}
-                customStyles="text-hotPink"
-              />
-            </div>
-
-            <div className="flex flex-col w-full mb-6">
-              <div className="flex mb-2">
-                <Text
-                  type="label"
-                  textEng="Unique group id:"
-                  textKor="유일한 그룹 아이디:"
-                  customStyles="text-gray-500"
-                />
-              </div>
-              <input
-                className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
                 {...register("unique_group_name", {
-                  required: "Make sure to include a unique group name.",
+                  required: "Make sure to include the group name.",
                 })}
                 name="unique_group_name"
                 placeholder={
-                  languageState.korean
-                    ? "다른 멤버들이 가입할수있는 방법"
-                    : "This is how other people will join"
+                  languageState.korean ? "그룹 ID를 입력하세요." : "Enter your group id"
                 }
               />
               <Text
@@ -175,20 +118,87 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
                 customStyles="text-hotPink"
               />
             </div>
-          </>
-        )}
+          )}
 
-        {groupOption === "alone" && (
-          <div className="flex mb-8">
-            <Text
-              type="label"
-              textEng="Are you sure you want to continue by yourself?"
-              textKor="그룹없이 진행하실껍니까?"
-              customStyles="text-gray-500"
-            />
-          </div>
-        )}
+          {groupOption === "create" && (
+            <>
+              <div className="flex flex-col w-full mb-6">
+                <div className="flex mb-2">
+                  <Text
+                    type="label"
+                    textEng="Name of your new group:"
+                    textKor="가입하고 싶은 그룹명"
+                    customStyles="text-gray-500"
+                  />
+                </div>
+                <input
+                  className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+                  {...register("group_name", {
+                    required: "Make sure to include the group name.",
+                  })}
+                  name="group_name"
+                  placeholder={
+                    languageState.korean ? "Best Group Ever" : "Best Group Ever"
+                  }
+                />
+                <Text
+                  type="p"
+                  textEng={errors!.group_name ? errors.group_name.message! : ""}
+                  textKor={errors!.group_name ? errors.group_name.message! : ""}
+                  customStyles="text-hotPink"
+                />
+              </div>
 
+              <div className="flex flex-col w-full mb-6">
+                <div className="flex mb-2">
+                  <Text
+                    type="label"
+                    textEng="Unique group id:"
+                    textKor="유일한 그룹 아이디:"
+                    customStyles="text-gray-500"
+                  />
+                </div>
+                <input
+                  className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+                  {...register("unique_group_name", {
+                    required: "Make sure to include a unique group name.",
+                  })}
+                  name="unique_group_name"
+                  placeholder={
+                    languageState.korean
+                      ? "다른 멤버들이 가입할수있는 방법"
+                      : "This is how other people will join"
+                  }
+                />
+                <Text
+                  type="p"
+                  textEng={
+                    errors!.unique_group_name
+                      ? errors.unique_group_name.message!
+                      : ""
+                  }
+                  textKor={
+                    errors!.unique_group_name
+                      ? errors.unique_group_name.message!
+                      : ""
+                  }
+                  customStyles="text-hotPink"
+                />
+              </div>
+            </>
+          )}
+
+          {groupOption === "alone" && (
+            <div className="flex mb-8">
+              <Text
+                type="label"
+                textEng="Are you sure you want to continue by yourself?"
+                textKor="그룹없이 진행하실껍니까?"
+                customStyles="text-gray-500"
+              />
+            </div>
+          )}
+        </div>
         <div className="flex w-full justify-between">
           <Button
             onClick={() => setStep(2)}

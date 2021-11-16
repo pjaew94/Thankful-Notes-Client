@@ -14,7 +14,6 @@ const setAuthToken = (token: string): void => {
 
 export const loadUser = () => async (dispatch: CallableFunction) => {
 
-  console.log(localStorage)
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -149,7 +148,6 @@ export const register =
     };
     const body = JSON.stringify({ data });
 
-    console.log(body)
 
     try {
       const res = await axios.post(

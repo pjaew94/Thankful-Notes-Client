@@ -54,16 +54,15 @@ const Register: NextPage = () => {
 
   useEffect(() => {
     loadUser()(authDispatch)
-    console.log(authState);
     if(authState?.isAuthenticated) {
       router.push('/dashboard')
     }
   }, [authState, router, authDispatch])
 
   return (
-    <div className="flex flex-col w-screen min-h-screen p-10 md:bg-pink relative">
+    <div className="flex flex-col w-screen min-h-screen p-10 md:bg-pink md:justify-center md:items-center">
       {authState?.error && <AuthWarning />}
-      <div className="relative w-full md:w-3/4 md:max-w-lg">
+      <div className=" w-full md:w-3/4 md:max-w-lg relative">
         {/* Logo and Language Dropdown */}
         <div className="flex w-full justify-between items-center md:justify-center">
           <LogoLink />
@@ -71,13 +70,13 @@ const Register: NextPage = () => {
         </div>
 
         {/* Greet Text and FORMS container */}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full md:items-center md:bg-white md:px-10 md:py-10 md:rounded-lg md:my-10 md:shadow-lg">
           {/* Greet */}
           <div className="flex flex-col justify-between mt-10 mb-5 md:items-center">
             <Text
-              type="h3"
-              textEng="Welcome to thankful.notes"
-              textKor="감사노트 가입을 환영합니다"
+              type="h2"
+              textEng="Thankful.Note"
+              textKor="감사노트"
               customStyles="mb-2"
             />
             <Text

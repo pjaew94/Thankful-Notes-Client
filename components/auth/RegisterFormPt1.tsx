@@ -55,7 +55,7 @@ const RegisterFormPt1: React.FC<IRegisterFormPt> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full md:min-h-[300px]'>
       {/* First Name Input */}
       <div className="flex flex-col w-full mb-6">
         <div className="flex mb-2">

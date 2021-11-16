@@ -25,7 +25,6 @@ export const auth =(state: IAuthState, action:IAuthAction): IAuthState => {
         case AuthActionType.LOGIN_FAIL:
         case AuthActionType.LOGOUT:
           localStorage.removeItem("token");
-          console.log(payload)
           return {
             ...state,
             token: null,
