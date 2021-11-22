@@ -66,6 +66,7 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
       setData({...data, unique_group_name: null})
       registerUser();
     }
+
     setIsLoading(false);
   };
 

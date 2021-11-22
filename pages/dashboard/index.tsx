@@ -53,14 +53,17 @@ const Dashboard: React.FC = () => {
     };
 
     const getPosts = async () => {
-      await getUserPosts(authState!.user!.username)(postsDispatch);
-      await getGroupPosts(authState!.user!.group_id!)(postsDispatch);
+      if(authState?.user) {
+        await getUserPosts(authState!.user!.username)(postsDispatch);
+        await getGroupPosts(authState!.user!.group_id!)(postsDispatch);
+      }
+
     };
     checkAuth();
     if (authState?.isAuthenticated) {
       getPosts();
     }
-  }, []);
+  }, [authState?.user?.username]);
 
   return (
     <div

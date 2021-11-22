@@ -13,6 +13,7 @@ import { GlobalContext } from "../context/Provider";
 import AuthWarning from "./../components/warnings/AuthWarning";
 import { loadUser, register } from "../context/actions/auth";
 import { useRouter } from "next/router";
+import { getUserPosts, getGroupPosts } from './../context/actions/posts';
 
 export interface IData {
   username: string | null;
@@ -41,14 +42,15 @@ const Register: NextPage = () => {
     unique_group_name: null,
   });
 
-  const { languageState, authState, authDispatch } = useContext(GlobalContext);
+  const { languageState, authState, authDispatch,postsDispatch } = useContext(GlobalContext);
 
   const registerUser = async () => {
 
      const res = await register(data)(authDispatch)
 
+
      if(res === "success"){
-        loadUser()(authDispatch)
+        await loadUser()(authDispatch)
      }
   }
 
