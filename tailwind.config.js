@@ -11,15 +11,23 @@ module.exports = {
       serif: ["Shapiro", "sans-serif"]
     },
     extend: {
+      gridTemplateColumns: {
+        // Simple 16 column grid
+       '16': 'repeat(16, minmax(0, 1fr))'
+      },
       colors: {
-        "red": "#B54750",
         "mustard": "#DCB74F",
         "blue": "#358DB5",
         "green": "#478D4F",
         "pink": "#FFF5F4",
+        "darkPink": "#ffc7c1",
         "hotPink": "#FF69B4",
-        "black": "#28282A",
-        "white": "#FFFFFF"
+        "black": "#111111",
+        "white": "#FFFFFF",
+        "yellow": "#FCFDE8",
+        "lightPurple": "#F1F4FF",
+        "mint": "#EBF7F7",
+        "darkMint": "#b4e1e1"
       },
       fontSize: {
         "logo-3xl": ["7vw", "7vw"],
@@ -27,7 +35,11 @@ module.exports = {
       },
       screens: {
         "3xl": "2560px"
+      },
+      zIndex: {
+        '-10': '-10'
       }
+      
     },
   },
   variants: {

@@ -1,13 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400&display=swap");
 
 @layer base {
   body {
     @apply overflow-x-hidden text-black;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
   }
-
 
   @font-face {
     font-family: "Etelka Hairline Pro";
@@ -16,12 +17,12 @@
   @font-face {
     font-family: "Helvetica";
     src: url("./fonts/Helvetica-Bold.ttf") format("truetype");
-    font-weight: 700
+    font-weight: 700;
   }
   @font-face {
     font-family: "Helvetica";
     src: url("./fonts/Helvetica.ttf") format("truetype");
-    font-weight: 400
+    font-weight: 400;
   }
   @font-face {
     font-family: "Arkit Light";
@@ -36,22 +37,25 @@
     src: url("./fonts/Shapiro35.otf") format("opentype");
   }
 
-  
   input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active  {
-      -webkit-box-shadow: 0 0 0 30px #EDEAE4 inset !important;
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #edeae4 inset !important;
   }
   input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
-}
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  }
+
+  ::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
 }

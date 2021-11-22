@@ -6,6 +6,7 @@ import FormSubmitButton from "../reusables/FormSubmitButton";
 import Text from "./../reusables/Text";
 import { loadUser } from "./../../context/actions/auth";
 import { useRouter } from "next/router";
+import {  getTodaysMessage } from './../../context/actions/todaysMessage';
 
 export interface ILoginForm {
   email: string;
@@ -23,7 +24,7 @@ const LoginForm: React.FC = () => {
     reset,
   } = useForm<ILoginForm>();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading ] = useState(false);
 
   useEffect(() => {
     if (authState!.error) {
@@ -36,6 +37,7 @@ const LoginForm: React.FC = () => {
     setIsLoading(true);
     await login(data.email, data.password)(authDispatch);
     await loadUser()(authDispatch);
+  
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full md:items-center md:bg-white md:px-10 md:py-10 md:rounded-lg md:my-10 md:shadow-lg">
@@ -68,11 +70,11 @@ const LoginForm: React.FC = () => {
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
-          className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+          className="px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
           {...register("email", { required: "Please include your email." })}
           name="email"
           placeholder={languageState.korean ? "유효한 이메일" : "valid email"}
@@ -81,7 +83,7 @@ const LoginForm: React.FC = () => {
           type="label"
           textEng={errors!.email ? errors.email.message! : ""}
           textKor={errors!.email ? errors.email.message! : ""}
-          customStyles="text-hotPink"
+          customStyles="text-red-400"
         />
       </div>
       {/* Password Input */}
@@ -97,11 +99,11 @@ const LoginForm: React.FC = () => {
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
-          className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink"
+          className="px-3 py-2  border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black"
           {...register("password", {
             required: "Please include your password.",
           })}
@@ -115,12 +117,12 @@ const LoginForm: React.FC = () => {
           type="label"
           textEng={errors!.password ? errors.password.message! : ""}
           textKor={errors!.password ? errors.password.message! : ""}
-          customStyles="text-hotPink"
+          customStyles="text-red-400"
         />
       </div>
 
       {/* Submit button */}
-      <FormSubmitButton loading={isLoading} textEng='Login' textKor='로그인' />
+      <FormSubmitButton loading={isLoading} textEng='Login' textKor='로그인' black={true} />
     </form>
   );
 };

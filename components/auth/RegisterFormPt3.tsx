@@ -94,7 +94,7 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
                 />
               </div>
               <input
-                className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+                className="px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
                 {...register("unique_group_name", {
                   required: "Make sure to include the group name.",
                 })}
@@ -132,7 +132,7 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
                   />
                 </div>
                 <input
-                  className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+                  className="px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black"
                   {...register("group_name", {
                     required: "Make sure to include the group name.",
                   })}
@@ -159,7 +159,7 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
                   />
                 </div>
                 <input
-                  className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+                  className="px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
                   {...register("unique_group_name", {
                     required: "Make sure to include a unique group name.",
                   })}
@@ -211,7 +211,8 @@ const RegisterFormPt3: React.FC<IRegisterFormPt3> = ({
             loading={isLoading}
             textEng="Join!"
             textKor="가입"
-            customStyles="w-5/12 bg-white"
+            customStyles="w-5/12"
+            black={true}
           />
         </div>
       </form>

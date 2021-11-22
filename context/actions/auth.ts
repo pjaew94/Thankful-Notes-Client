@@ -12,7 +12,7 @@ const setAuthToken = (token: string): void => {
   }
 };
 
-export const loadUser = () => async (dispatch: CallableFunction) => {
+export const loadUser = () => async (dispatch: CallableFunction): Promise<boolean> => {
 
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -20,16 +20,21 @@ export const loadUser = () => async (dispatch: CallableFunction) => {
   try {
     const userData = await axios.get(`http://localhost:5000/api/user`);
 
-    dispatch({
+    await dispatch({
       type: AuthActionType.USER_LOADED,
       payload: userData.data,
     });
+
+    return true
+
   } catch (err) {
     console.log(err);
     // dispatch({
     //   type: AuthActionType.AUTH_ERROR,
     //   payload: null,
     // });
+
+    return false
   }
 };
 
@@ -155,7 +160,6 @@ export const register =
         body,
         config
       );
-      console.log(res)
       await dispatch({
         type: AuthActionType.REGISTER_SUCCESS,
         payload: res.data.token,
@@ -179,7 +183,7 @@ export const removeWarning = () => async (dispatch: CallableFunction) => {
   });
 };
 
-export const logout = async () => async (dispatch: CallableFunction) => {
+export const logout = () => async (dispatch: CallableFunction) => {
   dispatch({
     type: AuthActionType.LOGOUT,
     payload: null,

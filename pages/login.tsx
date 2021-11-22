@@ -13,12 +13,14 @@ const Login: NextPage = () => {
     const router = useRouter();
 
     useEffect(() => {
-        loadUser()(authDispatch)
-        console.log(authState);
-        if(authState?.isAuthenticated) {
-            router.push('/dashboard')
+        const checkAuth = async() => {
+            const res = await loadUser()(authDispatch)
+            if (res === true) {
+                router.push('/dashboard/loading')
+              }
         }
-    }, [authState, router, authDispatch])
+        checkAuth()
+    }, [authState?.isAuthenticated])
 
     return (
         <div className='h-screen min-h-screen w-screen'>

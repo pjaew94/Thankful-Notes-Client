@@ -73,11 +73,11 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
-          className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+          className="px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
           {...register("username", {
             required: "Username must be unique.",
           })}
@@ -88,7 +88,7 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
           type="p"
           textEng={errors!.username ? errors.username.message! : ""}
           textKor={errors!.username ? errors.username.message! : ""}
-          customStyles="text-hotPink"
+          customStyles="text-black"
         />
       </div>
 
@@ -106,11 +106,11 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
               type="label"
               textEng="*"
               textKor="*"
-              customStyles="text-hotPink ml-1"
+              customStyles="text-red-400 ml-1"
             />
           </div>
           <input
-            className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+            className="px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
             {...register("email", {
               required: "Please include your email.",
             })}
@@ -125,7 +125,7 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
             type="p"
             textEng={errors!.email ? errors.email.message! : ""}
             textKor={errors!.email ? errors.email.message! : ""}
-            customStyles="text-hotPink"
+            customStyles="text-black"
           />
         </div>
       </div>
@@ -143,12 +143,12 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
         type="password"
-          className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+          className="px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
           {...register("password", {
             required:
               "Password must be 6 to 30 characters with at least one capital, one lowercase, and one number.",
@@ -162,7 +162,7 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
           type="p"
           textEng={errors!.password ? errors.password.message! : ""}
           textKor={errors!.password ? errors.password.message! : ""}
-          customStyles="text-hotPink"
+          customStyles="text-black"
         />
       </div>
 
@@ -179,12 +179,12 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
         type="password"
-          className=" px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+          className=" px-3 py-2 border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
           {...register("repeat_password", {
             required: "Must match your password.",
           })}
@@ -201,7 +201,7 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
           textKor={
             errors!.repeat_password ? errors.repeat_password.message! : ""
           }
-          customStyles="text-hotPink"
+          customStyles="text-black"
         />
       </div>
 
@@ -217,7 +217,8 @@ const RegisterFormPt2: React.FC<IRegisterFormPt> = ({
           loading={isLoading}
           textEng="Next"
           textKor="다음"
-          customStyles="w-5/12 bg-white"
+          customStyles="w-5/12"
+          black={true}
         />
       </div>
     </form>

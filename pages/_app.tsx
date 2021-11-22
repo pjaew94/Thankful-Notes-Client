@@ -7,9 +7,12 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { GlobalProvider } from "../context/Provider";
 import { useRouter } from "next/router";
+import Nav from "../components/dashboard/Nav.Mobile";
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
 
   return (
     <React.StrictMode>
@@ -19,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <title>Thankful Notes</title>
           </Head>
           <Component {...pageProps} key={router.route} />
+          <Nav />
         </GlobalProvider>
       </AnimatePresence>
     </React.StrictMode>

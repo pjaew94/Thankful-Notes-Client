@@ -14,9 +14,16 @@ export const todaysMessage = (
         loading: false,
       };
     case MessageActionType.GET_MESSAGE_FAIL:
+    case MessageActionType.CLEAR_MESSAGE:
       return {
         ...state,
-        loadedMessage: null,
+        loadedMessage: {
+          message: null,
+          message_kor: null,
+          book: null,
+          book_kor: null,
+          chapter_and_verse: null,
+      },
         loading: false,
       };
     default:

@@ -1,18 +1,16 @@
-import { useRouter } from "next/router";
+
 import LanguageDropdown from "../languageToggle/LanguageDropdown";
 import Text from "../reusables/Text";
 import LoginForm from "./LoginForm";
 import LogoLink from "./../brand/LogoLink";
 import Link from "next/link";
-import { useEffect } from "react";
+
 
 const LoginContent: React.FC = () => {
-  const router = useRouter();
 
-  useEffect(() => {});
 
   return (
-    <div className="flex flex-col w-full min-h-full p-10 md:justify-center md:items-center md:bg-pink">
+    <div className="flex flex-col w-full min-h-full p-10 md:justify-center md:items-center md:bg-gray-100">
       <div className='relative w-full md:w-3/4 md:max-w-lg'>
         <div className="flex w-full justify-between items-center md:justify-center">
           <LogoLink />
@@ -35,7 +33,7 @@ const LoginContent: React.FC = () => {
                 type="h4"
                 textEng="Register"
                 textKor="등록"
-                customStyles="text-hotPink ml-2"
+                customStyles="text-red-400 ml-2"
               />
             </a>
           </Link>

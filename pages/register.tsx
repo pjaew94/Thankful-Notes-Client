@@ -60,7 +60,7 @@ const Register: NextPage = () => {
   }, [authState, router, authDispatch])
 
   return (
-    <div className="flex flex-col w-screen min-h-screen p-10 md:bg-pink md:justify-center md:items-center">
+    <div className="flex flex-col w-screen min-h-screen p-10 md:bg-gray-100 md:justify-center md:items-center">
       {authState?.error && <AuthWarning />}
       <div className=" w-full md:w-3/4 md:max-w-lg relative">
         {/* Logo and Language Dropdown */}
@@ -127,7 +127,7 @@ const Register: NextPage = () => {
                 type="h4"
                 textEng="Login"
                 textKor="등록"
-                customStyles="text-hotPink ml-2"
+                customStyles="text-red-400 ml-2"
               />
             </a>
           </Link>

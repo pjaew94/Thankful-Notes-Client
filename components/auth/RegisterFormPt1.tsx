@@ -69,11 +69,11 @@ const RegisterFormPt1: React.FC<IRegisterFormPt> = ({
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
-          className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+          className="px-3 py-2  border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
           {...register("first_name", {
             required: "Please include your first name.",
           })}
@@ -84,7 +84,7 @@ const RegisterFormPt1: React.FC<IRegisterFormPt> = ({
           type="p"
           textEng={errors!.first_name ? errors.first_name.message! : ""}
           textKor={errors!.first_name ? errors.first_name.message! : ""}
-          customStyles="text-hotPink"
+          customStyles="text-black"
         />
       </div>
 
@@ -101,11 +101,11 @@ const RegisterFormPt1: React.FC<IRegisterFormPt> = ({
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
-          className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+          className="px-3 py-2  border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
           {...register("last_name", {
             required: "Please include your last name.",
           })}
@@ -116,7 +116,7 @@ const RegisterFormPt1: React.FC<IRegisterFormPt> = ({
           type="p"
           textEng={errors!.last_name ? errors.last_name.message! : ""}
           textKor={errors!.last_name ? errors.last_name.message! : ""}
-          customStyles="text-hotPink"
+          customStyles="text-black"
         />
       </div>
 
@@ -133,12 +133,12 @@ const RegisterFormPt1: React.FC<IRegisterFormPt> = ({
             type="label"
             textEng="*"
             textKor="*"
-            customStyles="text-hotPink ml-1"
+            customStyles="text-red-400 ml-1"
           />
         </div>
         <input
           type="number"
-          className="px-3 py-2 rounded-md border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-hotPink "
+          className="px-3 py-2  border-[1px] border-gray-300 text-black font-serif focus:outline-none focus:ring-1 focus:ring-black "
           {...register("age", { required: "Please include your age." })}
           name="age"
           placeholder={languageState.korean ? "나이" : "how old are ya?"}
@@ -147,11 +147,11 @@ const RegisterFormPt1: React.FC<IRegisterFormPt> = ({
           type="p"
           textEng={errors!.age ? errors.age.message! : ""}
           textKor={errors!.age ? errors.age.message! : ""}
-          customStyles="text-hotPink"
+          customStyles="text-black"
         />
       </div>
 
-      <FormSubmitButton loading={isLoading} textEng="Next" textKor="다음" />
+      <FormSubmitButton loading={isLoading} textEng="Next" textKor="다음" black={true} />
     </form>
   );
 };

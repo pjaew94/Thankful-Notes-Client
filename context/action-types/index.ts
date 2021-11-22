@@ -14,10 +14,28 @@ export enum AuthActionType {
 
 export enum MessageActionType {
     GET_MESSAGE_SUCCESS = 'GET_MESSAGE_SUCCESS',
-    GET_MESSAGE_FAIL = 'GET_MESSAGE_FAIL'
+    GET_MESSAGE_FAIL = 'GET_MESSAGE_FAIL',
+    CLEAR_MESSAGE = 'CLEAR_MESSAGE'
 }
 
 export enum LanguageActionType { 
     SET_ENGLISH = 'SET_ENGLISH',
     SET_KOREAN = 'SET_KOREAN',
 }
+
+export enum NavbarActionType {
+    SHOW_NAV = 'SHOW_NAV',
+    HIDE_NAV = 'HIDE_NAV',
+    SET_VALUE = 'SET_VALUE'
+}
+
+export enum GroupTypeActionType {
+    GET_BASIC_INFO = 'GET_BASIC_INFO',
+    
+}
+
+export enum PostsTypeActionType {
+    GET_USER_POSTS = 'GET_USER_POSTS',
+    GET_GROUP_POSTS ='GET_GROUP_POSTS',
+}
+
