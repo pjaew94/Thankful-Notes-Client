@@ -16,7 +16,7 @@ export const loadUserCallBack = async () => {
   }
   try {
     const userData = await axios.get(
-      `http://localhost:5000/api/user`
+      `https://thankful-notes-server.herokuapp.com/api/user`
     );
     return userData.data;
   } catch (err: any) {
@@ -36,7 +36,7 @@ export const createPost = async(data: IPostForm): Promise<"success" | "error"> =
 
     const body = JSON.stringify({ data });
 
-    const newPost = await axios.post('http://localhost:5000/api/posts', body, config)
+    const newPost = await axios.post('https://thankful-notes-server.herokuapp.com/api/posts', body, config)
 
 
     return "success"

@@ -13,7 +13,7 @@ const Loading: NextPage = () => {
     setTimeout(() => {
       router.push('/dashboard')
 
-    }, 2000);
+    }, 2500);
   }, []);
   return (
     <div className="w-screen h-screen fixed left-0 top-0 z-50 bg-white">

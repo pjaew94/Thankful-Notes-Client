@@ -12,6 +12,7 @@ import Statistics from "./Statistics";
 import { GlobalContext } from "../../context/Provider";
 import StatInfoMobile from "./StatInfoMobile.Mobile";
 import StatInfoDesktop from "./StatInfoDesktop";
+import { IShowFullPostState } from "../../pages/dashboard";
 
 export type IStatistic = "myPosts" | "groupMembers" | "groupPosts" | null;
 
@@ -21,6 +22,8 @@ interface IDashboardContent {
   showPostForm: boolean;
   setShowErrorModal: Dispatch<SetStateAction<boolean>>;
   showErrorModal: boolean;
+  setShowFullPost: Dispatch<SetStateAction<IShowFullPostState>>;
+  showFullPost: IShowFullPostState;
 }
 
 const DashboardContent: React.FC<IDashboardContent> = ({
@@ -29,6 +32,8 @@ const DashboardContent: React.FC<IDashboardContent> = ({
   showPostForm,
   setShowErrorModal,
   showErrorModal,
+  setShowFullPost,
+  showFullPost,
 }) => {
   const [statistic, setStatistic] = useState<IStatistic>(null);
   const currentSize = useResponsive();
@@ -38,7 +43,11 @@ const DashboardContent: React.FC<IDashboardContent> = ({
   useEffect(() => {}, []);
 
   return (
-    <div className={`flex flex-col w-full overflow-x-hidden z-10 xl:px-10 py-10 xl:h-screen overflow-y-scroll ${showPostForm && "md:overflow-y-hidden"}`}>
+    <div
+      className={`flex flex-col w-full overflow-x-hidden z-10 xl:px-10 py-10 xl:h-screen overflow-y-scroll ${
+        showPostForm && "md:overflow-y-hidden"
+      }`}
+    >
       {currentSize.isMobile && (
         <PostModalMobile
           setShowPostForm={setShowPostForm}
@@ -49,13 +58,25 @@ const DashboardContent: React.FC<IDashboardContent> = ({
         />
       )}
       {currentSize.isMobile && (
-        <StatInfoMobile setStatistic={setStatistic} statistic={statistic} />
+        <StatInfoMobile
+          setStatistic={setStatistic}
+          statistic={statistic}
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
+        />
       )}
       {/* Dashboard left field content */}
       <div className="flex flex-col w-full">
         <TodaysPostReminder setShowPostForm={setShowPostForm} />
         {authState?.user && <Statistics setStatistic={setStatistic} />}
-        {!currentSize.isMobile && <StatInfoDesktop statistic={statistic} setStatistic={setStatistic}  />}
+        {!currentSize.isMobile && (
+          <StatInfoDesktop
+            statistic={statistic}
+            setStatistic={setStatistic}
+            showFullPost={showFullPost}
+            setShowFullPost={setShowFullPost}
+          />
+        )}
       </div>
 
       {/* Dashboard right field content */}

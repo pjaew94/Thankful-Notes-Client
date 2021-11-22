@@ -5,11 +5,11 @@ import { INavState } from "../types"
 export const showNav = () => async(dispatch: CallableFunction) => {
 
     try {
+        
         await dispatch({
             type: NavbarActionType.SHOW_NAV,
             payload: null
         })
-
 
         
     } catch (err) {

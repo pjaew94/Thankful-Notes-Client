@@ -8,15 +8,20 @@ import LanguageDropdown from "./../languageToggle/LanguageDropdown";
 import Text from "../reusables/Text";
 import PostList from "./PostList";
 import GroupList from "./GroupList";
+import { IShowFullPostState } from "../../pages/dashboard";
 
 interface IStatInfoMobile {
   statistic: IStatistic;
   setStatistic: Dispatch<SetStateAction<IStatistic>>;
+  setShowFullPost: Dispatch<SetStateAction<IShowFullPostState>>;
+  showFullPost: IShowFullPostState;
 }
 
 const StatInfoMobile: React.FC<IStatInfoMobile> = ({
   statistic,
   setStatistic,
+  setShowFullPost,
+  showFullPost,
 }) => {
   const controls = useAnimation();
 
@@ -37,7 +42,7 @@ const StatInfoMobile: React.FC<IStatInfoMobile> = ({
 
   return (
     <motion.div
-      className="fixed right-0 top-0 w-screen h-screen max-h-screen bg-white px-10 py-10 overflow-y-scroll z-50"
+      className="fixed right-0 top-0 w-screen h-screen max-h-screen bg-white px-10 py-10 overflow-y-scroll z-40"
       variants={PostFormMobileVariant}
       initial="initial"
       animate={controls}
@@ -69,9 +74,21 @@ const StatInfoMobile: React.FC<IStatInfoMobile> = ({
 
       {statistic === "groupMembers" && <GroupList />}
 
-      {statistic === "myPosts" && <PostList statistic={statistic} />}
+      {statistic === "myPosts" && (
+        <PostList
+          statistic={statistic}
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
+        />
+      )}
 
-      {statistic === "groupPosts" && <PostList statistic={statistic} />}
+      {statistic === "groupPosts" && (
+        <PostList
+          statistic={statistic}
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
+        />
+      )}
     </motion.div>
   );
 };

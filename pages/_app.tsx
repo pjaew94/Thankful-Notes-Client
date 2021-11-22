@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
 
-  return (
+  return ( 
     <React.StrictMode>
       <AnimatePresence exitBeforeEnter>
         <GlobalProvider>

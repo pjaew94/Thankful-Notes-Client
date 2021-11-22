@@ -33,8 +33,8 @@ const Nav: React.FC = () => {
 
   return (
     <div
-      className={`flex w-screen h-screen fixed top-0 left-[-100vw] transition-all duration-500 ease-out overflow-x-hidden z-50 ${
-        navState.show && "left-0"
+      className={`flex w-screen h-screen fixed top-0 transition-all duration-500 ease-out overflow-x-hidden z-50 ${
+        navState.show ? "left-0" : "left-[-100vw]"
       }`}
     >
         {showLogoutWarning && <LogoutWarning setShowLogoutWarning={setShowLogoutWarning} />}

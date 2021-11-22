@@ -6,7 +6,7 @@ import { setLocalStorage } from './../call-backs/index';
 export const getUserPosts = (username: string) => async(dispatch:CallableFunction) => {
     try {
 
-        const res = await axios.get(`http://localhost:5000/api/user/posts/${username}`)
+        const res = await axios.get(`https://thankful-notes-server.herokuapp.com/api/user/posts/${username}`)
 
         setLocalStorage("userPosts", res.data)
 
@@ -21,7 +21,7 @@ export const getUserPosts = (username: string) => async(dispatch:CallableFunctio
 
 export const getGroupPosts = (groupId: string) => async(dispatch: CallableFunction) => {
     try {
-        const res = await axios.get(`http://localhost:5000/api/group/posts/${groupId}`)
+        const res = await axios.get(`https://thankful-notes-server.herokuapp.com/api/group/posts/${groupId}`)
         
         setLocalStorage("groupPosts", res.data)
         

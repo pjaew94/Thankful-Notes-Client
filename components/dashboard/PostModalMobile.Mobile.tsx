@@ -15,6 +15,7 @@ import TodaysDate from "./TodaysDate";
 import TodaysMessage from "./TodaysMessage";
 import PostForm from "./PostForm";
 import Button from "../reusables/Button";
+import { IShowFullPostState } from "../../pages/dashboard";
 
 interface IPostModalMobile {
   setShowPostForm: Dispatch<SetStateAction<boolean>>;
@@ -22,6 +23,7 @@ interface IPostModalMobile {
   showPostForm: boolean;
   setShowErrorModal: Dispatch<SetStateAction<boolean>>;
   showErrorModal: boolean
+
 }
 
 const PostModalMobile: React.FC<IPostModalMobile> = ({
@@ -29,7 +31,8 @@ const PostModalMobile: React.FC<IPostModalMobile> = ({
   showPostForm,
   setShowPostSuccess,
   setShowErrorModal,
-  showErrorModal
+  showErrorModal,
+
 }) => {
   const controls = useAnimation();
 

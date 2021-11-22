@@ -4,13 +4,13 @@ import { MessageActionType } from "../action-types";
 export const getTodaysMessage = () => async (dispatch: CallableFunction) => {
   try {
     const check = await axios.get(
-      "http://localhost:5000/api/posts/check/if-posted"
+      "https://thankful-notes-server.herokuapp.com/api/posts/check/if-posted"
     );
 
     if (check.data === false) {
 
       const res = await axios.get(
-        `http://localhost:5000/api/posts/todays/post`
+        `https://thankful-notes-server.herokuapp.com/api/posts/todays/post`
       );
 
       await dispatch({

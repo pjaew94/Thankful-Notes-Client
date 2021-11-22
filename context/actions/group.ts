@@ -6,7 +6,7 @@ import { IGroupState } from './../types';
 export const getGroupBasicInfo = () => async (dispatch: CallableFunction) => {
     try {
 
-        const res = await axios.get('http://localhost:5000/api/group')
+        const res = await axios.get('https://thankful-notes-server.herokuapp.com/api/group')
 
         
         setLocalStorage("groupInfo", res.data)

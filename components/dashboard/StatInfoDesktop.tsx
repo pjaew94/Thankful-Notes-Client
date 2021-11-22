@@ -6,55 +6,64 @@ import PostList from "./PostList";
 import GroupList from "./GroupList";
 import TodaysDate from "./TodaysDate";
 import { getLocalStorage } from "../../context/call-backs";
-import { IGroupState } from './../../context/types';
+import { IGroupState } from "./../../context/types";
+import { IShowFullPostState } from "../../pages/dashboard";
 
 interface IStatInfoDesktop {
   setStatistic: Dispatch<SetStateAction<IStatistic>>;
   statistic: IStatistic;
+  setShowFullPost: Dispatch<SetStateAction<IShowFullPostState>>;
+  showFullPost: IShowFullPostState;
 }
 
 const StatInfoDesktop: React.FC<IStatInfoDesktop> = ({
   setStatistic,
   statistic,
+  setShowFullPost,
+  showFullPost,
 }) => {
-
-  const groupInfo: IGroupState = getLocalStorage("groupInfo", null)
-
+  const groupInfo: IGroupState = getLocalStorage("groupInfo", null);
 
   return (
     <div className="w-full flex flex-col mt-10">
-      <div className='w-full flex justify-between items-center'>
-      <Text
-        type="h7"
-        textEng={
-          statistic === "myPosts"
-            ? "My Posts"
-            : statistic === "groupMembers"
-            ? groupInfo.group_name + " - Members"
-            : statistic === "groupPosts"
-            ? groupInfo.group_name + " - Posts"
-            : null
-        }
-        textKor={
-          statistic === "myPosts"
-            ? "본인 게시물"
-            : statistic === "groupMembers"
-            ? "그룹 멤머들"
-            : statistic === "groupPosts"
-            ? "그룹 게시물"
-            : null
-        }
-      />
-      <TodaysDate 
-        notFull={true}
-      />
+      <div className="w-full flex justify-between items-center">
+        <Text
+          type="h7"
+          textEng={
+            statistic === "myPosts"
+              ? "My Posts"
+              : statistic === "groupMembers"
+              ? groupInfo.group_name + " - Members"
+              : statistic === "groupPosts"
+              ? groupInfo.group_name + " - Posts"
+              : null
+          }
+          textKor={
+            statistic === "myPosts"
+              ? "본인 게시물"
+              : statistic === "groupMembers"
+              ? "그룹 멤머들"
+              : statistic === "groupPosts"
+              ? "그룹 게시물"
+              : null
+          }
+        />
+        <TodaysDate notFull={true} />
       </div>
 
       <div className="w-full mt-10">
         {statistic === "myPosts" ? (
-          <PostList statistic={statistic} />
+          <PostList
+            statistic={statistic}
+            showFullPost={showFullPost}
+            setShowFullPost={setShowFullPost}
+          />
         ) : statistic === "groupPosts" ? (
-          <PostList statistic={statistic} />
+          <PostList
+            statistic={statistic}
+            showFullPost={showFullPost}
+            setShowFullPost={setShowFullPost}
+          />
         ) : statistic === "groupMembers" ? (
           <GroupList />
         ) : null}

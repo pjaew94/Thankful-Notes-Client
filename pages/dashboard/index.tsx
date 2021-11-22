@@ -13,7 +13,11 @@ import PostSuccess from "../../components/dashboard/PostSuccess";
 import useResponsive from "../../hooks/useResponsive";
 import NavDesktop from "../../components/dashboard/NavDesktop";
 import PostModalDesktop from "../../components/dashboard/PostModalDesktop";
+import FullPostInfoMobile from "./../../components/dashboard/FullPostInfoMobile.Mobile";
+import { IPost } from "../../context/types";
+import FullPostInfoDesktop from "./../../components/dashboard/FullPostInfoDesktop";
 
+export type IShowFullPostState = IPost | null;
 
 const Dashboard: React.FC = () => {
   const router = useRouter();
@@ -23,6 +27,7 @@ const Dashboard: React.FC = () => {
   const [showPostSuccess, setShowPostSuccess] = useState(false);
   const [showPostForm, setShowPostForm] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showFullPost, setShowFullPost] = useState<IShowFullPostState>(null);
 
   const {
     authState,
@@ -55,12 +60,25 @@ const Dashboard: React.FC = () => {
     if (authState?.isAuthenticated) {
       getPosts();
     }
-
   }, []);
 
   return (
-    <div className={`flex flex-col w-screen min-h-screen py-10 px-10 md:p-16 bg-white xl:p-0 xl:flex-row`}>
+    <div
+      className={`flex flex-col w-screen min-h-screen py-10 px-10 md:p-16 bg-white xl:p-0 xl:flex-row`}
+    >
       {showPostSuccess && <PostSuccess />}
+      {currentSize.isMobile && (
+        <FullPostInfoMobile
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
+        />
+      )}
+      {!currentSize.isMobile && showFullPost ?  (
+        <FullPostInfoDesktop
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
+        />
+      ) : null}
       {showPostForm && !currentSize.isMobile ? (
         <PostModalDesktop
           showPostForm={showPostForm}
@@ -70,7 +88,11 @@ const Dashboard: React.FC = () => {
         />
       ) : null}
 
-      {currentSize.isMobile || currentSize.isTablet ? <Header /> : <NavDesktop />}
+      {currentSize.isMobile || currentSize.isTablet ? (
+        <Header />
+      ) : (
+        <NavDesktop />
+      )}
 
       <div className="xl:w-6/12">
         <DashboardContent
@@ -79,11 +101,11 @@ const Dashboard: React.FC = () => {
           setShowPostForm={setShowPostForm}
           showErrorModal={showErrorModal}
           setShowErrorModal={setShowErrorModal}
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
         />
       </div>
-      {currentSize.isDesktop && <div className="w-4/12">
-
-        </div>}
+      {currentSize.isDesktop && <div className="w-4/12"></div>}
     </div>
   );
 };

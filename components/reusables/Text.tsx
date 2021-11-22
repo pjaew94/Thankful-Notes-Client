@@ -28,7 +28,7 @@ const Text:React.FC<IText> = ({type, textEng, textKor, customStyles}) => {
 
     const {languageState } = useContext(GlobalContext);
     return (
-        <div className={`${styles[type]} ${languageState.korean && 'font-kor'} ${customStyles}`}>
+        <div className={`break-normal ${styles[type]} ${languageState.korean && 'font-kor'} ${customStyles}`}>
             {languageState.korean ? textKor : textEng}
         </div>
     )

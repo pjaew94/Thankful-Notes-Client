@@ -18,7 +18,7 @@ export const loadUser = () => async (dispatch: CallableFunction): Promise<boolea
     setAuthToken(localStorage.token);
   }
   try {
-    const userData = await axios.get(`http://localhost:5000/api/user`);
+    const userData = await axios.get(`https://thankful-notes-server.herokuapp.com/api/user`);
 
     await dispatch({
       type: AuthActionType.USER_LOADED,
@@ -49,7 +49,7 @@ export const login =
     const body = JSON.stringify({ email, password });
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/user/login`,
+        `https://thankful-notes-server.herokuapp.com/api/user/login`,
         body,
         config
       );
@@ -80,7 +80,7 @@ export const secondStepRegistrationCheckPoint =
 
     try {
       await axios.post(
-        `http://localhost:5000/api/user/check-auth-section`,
+        `https://thankful-notes-server.herokuapp.com/api/user/check-auth-section`,
         body,
         config
       );
@@ -112,7 +112,7 @@ export const checkIfGroupExists =
     if (groupOption === "join") {
       try {
         await axios.post(
-          "http://localhost:5000/api/user/check-group-join",
+          "https://thankful-notes-server.herokuapp.com/api/user/check-group-join",
           body,
           config
         );
@@ -129,7 +129,7 @@ export const checkIfGroupExists =
     if (groupOption === "create") {
       try {
         await axios.post(
-          "http://localhost:5000/api/group/",
+          "https://thankful-notes-server.herokuapp.com/api/group/",
           body,
           config
         );
@@ -156,7 +156,7 @@ export const register =
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/user`,
+        `https://thankful-notes-server.herokuapp.com/api/user`,
         body,
         config
       );
