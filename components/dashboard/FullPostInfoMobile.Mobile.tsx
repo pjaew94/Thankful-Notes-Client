@@ -1,24 +1,29 @@
 import { useAnimation, motion } from "framer-motion";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { PostFormMobileVariant } from "../../motion";
 import { IShowFullPostState } from "../../pages/dashboard";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 import LanguageDropdown from "./../languageToggle/LanguageDropdown";
 import Text from "../reusables/Text";
 import LogoLink from "../brand/LogoLink";
-import { ClockIcon, IdentificationIcon, PencilIcon } from "@heroicons/react/outline";
-import { PostEditForm, ShowPost } from './FullPostInfoDesktop';
+import {
+  ClockIcon,
+  IdentificationIcon,
+  PencilIcon,
+} from "@heroicons/react/outline";
+import { PostEditForm, ShowPost } from "./FullPostInfoDesktop";
+import { GlobalContext } from './../../context/Provider';
 
 interface FullPostInfoMobile {
   setShowFullPost: Dispatch<SetStateAction<IShowFullPostState>>;
   showFullPost: IShowFullPostState;
-  setShowErrorModal: Dispatch<SetStateAction<boolean>>
+  setShowErrorModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
   showFullPost,
   setShowFullPost,
-  setShowErrorModal
+  setShowErrorModal,
 }) => {
   const [editMode, setEditMode] = useState(false);
 
@@ -47,7 +52,7 @@ const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
 
   const dateChecked = dateModified === todaysDate ? "Today" : dateModified;
 
- 
+  const {authState} = useContext(GlobalContext)
 
   return (
     <motion.div
@@ -82,10 +87,15 @@ const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
           <ClockIcon className="text-black h-4 w-4 mr-2" />
           <Text type="h4" textEng={dateChecked} textKor={dateChecked} />
         </div>
-        <button className='flex absolute right-5 items-center lg:hover:scale-105' onClick={() => setEditMode(!editMode)}>
-                <PencilIcon className="text-black h-4 w-4 mr-2" />
-                <Text type='h4' textEng='Edit' textKor='편집' />
-            </button>
+        {authState?.user?.username === showFullPost?.username && (
+          <button
+            className="flex absolute right-5 items-center lg:hover:scale-105"
+            onClick={() => setEditMode(!editMode)}
+          >
+            <PencilIcon className="text-black h-4 w-4 mr-2" />
+            <Text type="h4" textEng="Edit" textKor="편집" />
+          </button>
+        )}
       </div>
 
       {/* Message */}
@@ -121,18 +131,18 @@ const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
       </div>
 
       {editMode ? (
-            <PostEditForm
-            setShowErrorModal={setShowErrorModal}
-              showFullPost={showFullPost}
-              setShowFullPost={setShowFullPost}
-            />
-          ) : (
-            <ShowPost
-              setShowErrorModal={setShowErrorModal}
-              showFullPost={showFullPost}
-              setShowFullPost={setShowFullPost}
-            />
-          )}
+        <PostEditForm
+          setShowErrorModal={setShowErrorModal}
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
+        />
+      ) : (
+        <ShowPost
+          setShowErrorModal={setShowErrorModal}
+          showFullPost={showFullPost}
+          setShowFullPost={setShowFullPost}
+        />
+      )}
     </motion.div>
   );
 };

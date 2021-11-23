@@ -12,7 +12,6 @@ import { IPostForm, PostFormField, PostFormPrivateToggle } from "./PostForm";
 import FormSubmitButton from "./../reusables/FormSubmitButton";
 import { loadUser } from './../../context/actions/auth';
 import { getUserPosts , getGroupPosts} from './../../context/actions/posts';
-import { clearTodaysMessage } from "../../context/actions/todaysMessage";
 import { GlobalContext } from './../../context/Provider';
 import { editPost } from "../../context/call-backs";
 
@@ -37,6 +36,8 @@ const FullPostInfoDesktop: React.FC<FullPostInfoDesktop> = ({
   const dateModified = showFullPost?.date_posted?.slice(0, 10);
 
   const dateChecked = dateModified === todaysDate ? "Today" : dateModified;
+
+  const {authState} = useContext(GlobalContext)
 
   return (
     <div className="fixed right-0 top-0 w-screen max-h-screen h-screen z-50">
@@ -83,10 +84,13 @@ const FullPostInfoDesktop: React.FC<FullPostInfoDesktop> = ({
               <ClockIcon className="text-black h-4 w-4 mr-2" />
               <Text type="h4" textEng={dateChecked} textKor={dateChecked} />
             </div>
-            <button className='flex absolute right-5 items-center lg:hover:scale-105' onClick={() => setEditMode(!editMode)}>
-                <PencilIcon className="text-black h-4 w-4 mr-2" />
-                <Text type='h4' textEng='Edit' textKor='편집' />
-            </button>
+            {authState?.user?.username === showFullPost?.username &&
+                          <button className='flex absolute right-5 items-center lg:hover:scale-105' onClick={() => setEditMode(!editMode)}>
+                          <PencilIcon className="text-black h-4 w-4 mr-2" />
+                          <Text type='h4' textEng='Edit' textKor='편집' />
+                      </button>
+            }
+   
           </div>
 
           {/* Message */}

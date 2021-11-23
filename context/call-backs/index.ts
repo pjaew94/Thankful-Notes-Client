@@ -62,7 +62,7 @@ export const editPost = async(data: IPostForm, id: string): Promise<"success" | 
 
 
 
-    const editedPost = await axios.put(`http://localhost:5000/api/posts/${id}`, body, config)
+    const editedPost = await axios.put(`https://thankful-notes-server.herokuapp.com/api/posts/${id}`, body, config)
 
 
     return 'success'
