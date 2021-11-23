@@ -14,6 +14,8 @@ export const getUserPosts = (username: string) => async(dispatch:CallableFunctio
             type: PostsTypeActionType.GET_USER_POSTS,
             payload: res.data
         })
+
+        
     } catch (err: any) {
         console.log(err.response)
     }

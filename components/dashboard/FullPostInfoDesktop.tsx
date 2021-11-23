@@ -1,22 +1,33 @@
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { PostModalDesktopVariant } from "../../motion";
 import { IShowFullPostState } from "../../pages/dashboard";
 import LogoLink from "../brand/LogoLink";
 import Text from "../reusables/Text";
 import LanguageDropdown from "./../languageToggle/LanguageDropdown";
-import { ClockIcon, IdentificationIcon, XIcon } from "@heroicons/react/outline";
+import { ClockIcon, IdentificationIcon, XIcon, PencilIcon } from "@heroicons/react/outline";
 import Button from "../reusables/Button";
+import { useForm } from "react-hook-form";
+import { IPostForm, PostFormField, PostFormPrivateToggle } from "./PostForm";
+import FormSubmitButton from "./../reusables/FormSubmitButton";
+import { loadUser } from './../../context/actions/auth';
+import { getUserPosts , getGroupPosts} from './../../context/actions/posts';
+import { clearTodaysMessage } from "../../context/actions/todaysMessage";
+import { GlobalContext } from './../../context/Provider';
+import { editPost } from "../../context/call-backs";
 
 interface FullPostInfoDesktop {
   setShowFullPost: Dispatch<SetStateAction<IShowFullPostState>>;
   showFullPost: IShowFullPostState;
+  setShowErrorModal: Dispatch<SetStateAction<boolean>>
 }
 
 const FullPostInfoDesktop: React.FC<FullPostInfoDesktop> = ({
   setShowFullPost,
   showFullPost,
+  setShowErrorModal
 }) => {
+  const [editMode, setEditMode] = useState(false);
   const today = new Date();
   const date: number = today.getDate();
   const month: number = today.getMonth();
@@ -53,7 +64,7 @@ const FullPostInfoDesktop: React.FC<FullPostInfoDesktop> = ({
 
           {/* Author and the Post time */}
           <div
-            className={`flex justify-center border border-black px-5 py-3 mb-8 w-full`}
+            className={`relative flex justify-center border border-black px-5 py-3 mb-8 w-full`}
           >
             <div className="flex items-center mr-5">
               <IdentificationIcon className="text-black h-4 w-4 mr-2" />
@@ -72,6 +83,10 @@ const FullPostInfoDesktop: React.FC<FullPostInfoDesktop> = ({
               <ClockIcon className="text-black h-4 w-4 mr-2" />
               <Text type="h4" textEng={dateChecked} textKor={dateChecked} />
             </div>
+            <button className='flex absolute right-5 items-center lg:hover:scale-105' onClick={() => setEditMode(!editMode)}>
+                <PencilIcon className="text-black h-4 w-4 mr-2" />
+                <Text type='h4' textEng='Edit' textKor='편집' />
+            </button>
           </div>
 
           {/* Message */}
@@ -106,82 +121,254 @@ const FullPostInfoDesktop: React.FC<FullPostInfoDesktop> = ({
             </div>
           </div>
 
-          {/* 5 Thoughts */}
-          <Text
-            type="h6"
-            textEng="Gratitude"
-            textKor="감사"
-            customStyles="mb-px"
-          />
-          <div className="flex flex-col w-full mt-6 px-5 py-5 bg-mint mb-10">
-            <Text
-              type="p"
-              textEng={"1. " + showFullPost?.thought_on_verse1}
-              textKor={"1. " + showFullPost?.thought_on_verse1}
-              customStyles="mb-2"
+          {editMode ? (
+            <PostEditForm
+            setShowErrorModal={setShowErrorModal}
+              showFullPost={showFullPost}
+              setShowFullPost={setShowFullPost}
             />
-            <Text
-              type="p"
-              textEng={"2. " + showFullPost?.thought_on_verse2}
-              textKor={"2. " + showFullPost?.thought_on_verse2}
-              customStyles="mb-2"
+          ) : (
+            <ShowPost
+              setShowErrorModal={setShowErrorModal}
+              showFullPost={showFullPost}
+              setShowFullPost={setShowFullPost}
             />
-            <Text
-              type="p"
-              textEng={"3. " + showFullPost?.thought_on_verse3}
-              textKor={"3. " + showFullPost?.thought_on_verse3}
-              customStyles="mb-2"
-            />
-            <Text
-              type="p"
-              textEng={"4. " + showFullPost?.thought_on_verse4}
-              textKor={"4. " + showFullPost?.thought_on_verse4}
-              customStyles="mb-2"
-            />
-            <Text
-              type="p"
-              textEng={"5. " + showFullPost?.thought_on_verse5}
-              textKor={"5. " + showFullPost?.thought_on_verse5}
-            />
-          </div>
-
-          {/* 5 Thoughts */}
-          <Text
-            type="h6"
-            textEng="Show Thanks"
-            textKor="감사 표현"
-            customStyles="mb-px"
-          />
-          <div className="flex flex-col w-full mt-6 px-5 py-5 bg-lightPurple mb-10">
-            <Text
-              type="p"
-              textEng={"1. " + showFullPost?.show_thanks1}
-              textKor={"1. " + showFullPost?.show_thanks1}
-              customStyles="mb-2"
-            />
-            <Text
-              type="p"
-              textEng={"2. " + showFullPost?.show_thanks2}
-              textKor={"2. " + showFullPost?.show_thanks2}
-              customStyles="mb-2"
-            />
-            <Text
-              type="p"
-              textEng={"3. " + showFullPost?.show_thanks3}
-              textKor={"3. " + showFullPost?.show_thanks3}
-            />
-          </div>
-
-          <Button 
-        onClick={() => setShowFullPost(null)}
-        textEng='Close'
-        textKor='닫기'
-      />
-      
+          )}
         </motion.div>
       </div>
     </div>
   );
 };
 
+export const PostEditForm: React.FC<FullPostInfoDesktop> = ({
+  showFullPost,
+  setShowFullPost,
+  setShowErrorModal
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IPostForm>({
+    defaultValues: {
+      thought_on_verse1: showFullPost!.thought_on_verse1!,
+      thought_on_verse2: showFullPost!.thought_on_verse2!,
+      thought_on_verse3: showFullPost!.thought_on_verse3!,
+      thought_on_verse4: showFullPost!.thought_on_verse4!,
+      thought_on_verse5: showFullPost!.thought_on_verse5!,
+      show_thanks1: showFullPost!.show_thanks1!,
+      show_thanks2: showFullPost!.show_thanks2!,
+      show_thanks3: showFullPost!.show_thanks3!
+    },
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPrivate, setIsPrivate] = useState<boolean>(showFullPost?.is_private!);
+
+  const {authState, postsDispatch, authDispatch} = useContext(GlobalContext)
+
+  const onSubmit = async (data: IPostForm) => {
+        setIsLoading(true);
+        const finalData = {
+          ...data,
+          is_private: isPrivate
+        };
+
+
+
+        const res = await editPost(finalData, showFullPost!.id!)
+
+        if (res === "success") {
+          setShowFullPost(null)
+        } else (
+          setShowErrorModal(true)
+        )
+
+        setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const getPosts = async() => {
+      await loadUser()(authDispatch)
+      await getUserPosts(authState!.user!.username)(postsDispatch);
+      await getGroupPosts(authState!.user!.group_id!)(postsDispatch);
+    }
+
+    return function cleanup() {
+      getPosts()
+    }
+  })
+
+  return (
+    <form className="" onSubmit={handleSubmit(onSubmit)}>
+      <Text
+        type="h6"
+        textEng="Today's Thanks"
+        textKor="오늘의 감사"
+        customStyles="mb-px"
+      />
+      <Text
+        type="p"
+        textEng="What are 5 things you were thankful for today?"
+        textKor="오늘은 다섯가지 감사한게 무엇이있었습니까?"
+        customStyles=" text-gray-400"
+      />
+
+      <div className="flex flex-col w-full mt-6 px-5 py-5 bg-lightPurple">
+        <PostFormField
+          register={register}
+          step="1."
+          field="thought_on_verse1"
+        />
+        <PostFormField
+          register={register}
+          step="2."
+          field="thought_on_verse2"
+        />
+        <PostFormField
+          register={register}
+          step="3."
+          field="thought_on_verse3"
+        />
+        <PostFormField
+          register={register}
+          step="4."
+          field="thought_on_verse4"
+        />
+        <PostFormField
+          register={register}
+          step="5."
+          field="thought_on_verse5"
+        />
+      </div>
+      {errors.thought_on_verse1 ||
+      errors.thought_on_verse2 ||
+      errors.thought_on_verse3 ||
+      errors.thought_on_verse4 ||
+      errors.thought_on_verse5 ? (
+        <Text
+          type="p"
+          textEng="*Make sure to include all 5 fields!"
+          textKor="*5개의 필드를 모두 포함해야 합니다!"
+          customStyles="text-red-400"
+        />
+      ) : null}
+
+      <Text
+        type="h6"
+        textEng="Show Gratitude"
+        textKor="감사의 표시"
+        customStyles="mb-px mt-10"
+      />
+      <Text
+        type="p"
+        textEng="In what 3 ways did you show your gratitude today?"
+        textKor="오늘 감사를 표현한 3가지 방법은?"
+        customStyles=" mb-6 text-gray-400"
+      />
+
+      <div className="flex flex-col w-full px-5 py-5 bg-mint">
+        <PostFormField register={register} step="1." field="show_thanks1" />
+        <PostFormField register={register} step="2." field="show_thanks2" />
+        <PostFormField register={register} step="3." field="show_thanks3" />
+      </div>
+      {errors.show_thanks1 || errors.show_thanks2 || errors.show_thanks3 ? (
+        <Text
+          type="p"
+          textEng="*Make sure to include all 3 fields!"
+          textKor="*3개의 필드를 모두 포함해야 합니다!"
+          customStyles="text-red-400"
+        />
+      ) : null}
+
+      <PostFormPrivateToggle
+        setIsPrivate={setIsPrivate}
+        isPrivate={isPrivate}
+      />
+
+      <FormSubmitButton
+        loading={isLoading}
+        textEng="Edit Post"
+        textKor="포스트 편집"
+        black={true}
+        customStyles="mt-16"
+      />
+    </form>
+  );
+};
+
+export const ShowPost: React.FC<FullPostInfoDesktop> = ({
+  showFullPost,
+  setShowFullPost,
+}) => {
+  return (
+    <>
+      <Text type="h6" textEng="Gratitude" textKor="감사" customStyles="mb-px" />
+      <div className="flex flex-col w-full mt-6 px-5 py-5 bg-mint mb-10">
+        <Text
+          type="p"
+          textEng={"1. " + showFullPost?.thought_on_verse1}
+          textKor={"1. " + showFullPost?.thought_on_verse1}
+          customStyles="mb-2"
+        />
+        <Text
+          type="p"
+          textEng={"2. " + showFullPost?.thought_on_verse2}
+          textKor={"2. " + showFullPost?.thought_on_verse2}
+          customStyles="mb-2"
+        />
+        <Text
+          type="p"
+          textEng={"3. " + showFullPost?.thought_on_verse3}
+          textKor={"3. " + showFullPost?.thought_on_verse3}
+          customStyles="mb-2"
+        />
+        <Text
+          type="p"
+          textEng={"4. " + showFullPost?.thought_on_verse4}
+          textKor={"4. " + showFullPost?.thought_on_verse4}
+          customStyles="mb-2"
+        />
+        <Text
+          type="p"
+          textEng={"5. " + showFullPost?.thought_on_verse5}
+          textKor={"5. " + showFullPost?.thought_on_verse5}
+        />
+      </div>
+
+      {/* 5 Thoughts */}
+      <Text
+        type="h6"
+        textEng="Show Thanks"
+        textKor="감사 표현"
+        customStyles="mb-px"
+      />
+      <div className="flex flex-col w-full mt-6 px-5 py-5 bg-lightPurple mb-10">
+        <Text
+          type="p"
+          textEng={"1. " + showFullPost?.show_thanks1}
+          textKor={"1. " + showFullPost?.show_thanks1}
+          customStyles="mb-2"
+        />
+        <Text
+          type="p"
+          textEng={"2. " + showFullPost?.show_thanks2}
+          textKor={"2. " + showFullPost?.show_thanks2}
+          customStyles="mb-2"
+        />
+        <Text
+          type="p"
+          textEng={"3. " + showFullPost?.show_thanks3}
+          textKor={"3. " + showFullPost?.show_thanks3}
+        />
+      </div>
+
+      <Button
+        onClick={() => setShowFullPost(null)}
+        textEng="Close"
+        textKor="닫기"
+      />
+    </>
+  );
+};
 export default FullPostInfoDesktop;

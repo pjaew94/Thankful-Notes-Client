@@ -10,6 +10,7 @@ import {
   import Text from "../reusables/Text";
   import { useRouter } from "next/router";
   import LogoutWarning from './../warnings/LogoutWarning';
+import LanguageDropdown from "../languageToggle/LanguageDropdown";
   
   
   const NavDesktop: React.FC = () => {
@@ -27,13 +28,14 @@ import {
   
     return (
       <div
-        className={`flex w-full h-screen md:w-5/12 lg:w-3/12 xl:w-2/12`}
+        className={`flex w-full h-screen  lg:w-3/16 2xl:w-[18%]`}
       >
           {showLogoutWarning && <LogoutWarning setShowLogoutWarning={setShowLogoutWarning} />}
         <div className="relative flex flex-col w-full h-full bg-black px-10 py-10 xl:px-16 xl:py-16" >
           {/* Logo and Back Button */}
-          <div className="flex w-full mb-32">
+          <div className="flex w-full mb-32 justify-between">
             <LogoLink white={true} />
+            <LanguageDropdown white={true} />
           </div>
   
           {/* Dashboard/Group Links */}

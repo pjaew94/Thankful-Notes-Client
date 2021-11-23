@@ -3,15 +3,16 @@ export const fadeUpVariant = {
         y: 20,
         opacity: 0
     },
-    animate: {
+    animate: (custom: number) => ({
         y: 0,
         opacity: 1,
         transition: {
             type: "spring",
             duration: 1,
             bounce: 0,
+            delay: custom
         }
-    },
+    }),
     exit: {
         y: 30,
         opacity: 0,

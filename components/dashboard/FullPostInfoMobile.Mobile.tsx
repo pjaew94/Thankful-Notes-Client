@@ -1,22 +1,27 @@
 import { useAnimation, motion } from "framer-motion";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { PostFormMobileVariant } from "../../motion";
 import { IShowFullPostState } from "../../pages/dashboard";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 import LanguageDropdown from "./../languageToggle/LanguageDropdown";
 import Text from "../reusables/Text";
 import LogoLink from "../brand/LogoLink";
-import { ClockIcon, IdentificationIcon } from "@heroicons/react/outline";
+import { ClockIcon, IdentificationIcon, PencilIcon } from "@heroicons/react/outline";
+import { PostEditForm, ShowPost } from './FullPostInfoDesktop';
 
 interface FullPostInfoMobile {
   setShowFullPost: Dispatch<SetStateAction<IShowFullPostState>>;
   showFullPost: IShowFullPostState;
+  setShowErrorModal: Dispatch<SetStateAction<boolean>>
 }
 
 const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
   showFullPost,
   setShowFullPost,
+  setShowErrorModal
 }) => {
+  const [editMode, setEditMode] = useState(false);
+
   const controls = useAnimation();
 
   useEffect(() => {
@@ -42,6 +47,8 @@ const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
 
   const dateChecked = dateModified === todaysDate ? "Today" : dateModified;
 
+ 
+
   return (
     <motion.div
       className=" flex flex-col fixed right-0 top-0 w-screen h-screen max-h-screen bg-white px-10 py-10 overflow-y-scroll z-50"
@@ -60,7 +67,7 @@ const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
 
       {/* Author and the Post time */}
       <div
-        className={`flex flex-col border border-black px-5 py-3 mb-8 w-full`}
+        className={`relative flex flex-col border border-black px-5 py-3 mb-8 w-full`}
       >
         <div className="flex items-center">
           <IdentificationIcon className="text-black h-4 w-4 mr-2" />
@@ -75,6 +82,10 @@ const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
           <ClockIcon className="text-black h-4 w-4 mr-2" />
           <Text type="h4" textEng={dateChecked} textKor={dateChecked} />
         </div>
+        <button className='flex absolute right-5 items-center lg:hover:scale-105' onClick={() => setEditMode(!editMode)}>
+                <PencilIcon className="text-black h-4 w-4 mr-2" />
+                <Text type='h4' textEng='Edit' textKor='편집' />
+            </button>
       </div>
 
       {/* Message */}
@@ -109,66 +120,19 @@ const FullPostInfoMobile: React.FC<FullPostInfoMobile> = ({
         </div>
       </div>
 
-      {/* 5 Thoughts */}
-      <Text type="h6" textEng="Gratitude" textKor="감사" customStyles="mb-px" />
-      <div className="flex flex-col w-full mt-6 px-5 py-5 bg-mint mb-10">
-        <Text
-          type="p"
-          textEng={"1. " + showFullPost?.thought_on_verse1}
-          textKor={"1. " + showFullPost?.thought_on_verse1}
-          customStyles="mb-2"
-        />
-        <Text
-          type="p"
-          textEng={"2. " + showFullPost?.thought_on_verse2}
-          textKor={"2. " + showFullPost?.thought_on_verse2}
-          customStyles="mb-2"
-        />
-        <Text
-          type="p"
-          textEng={"3. " + showFullPost?.thought_on_verse3}
-          textKor={"3. " + showFullPost?.thought_on_verse3}
-          customStyles="mb-2"
-        />
-        <Text
-          type="p"
-          textEng={"4. " + showFullPost?.thought_on_verse4}
-          textKor={"4. " + showFullPost?.thought_on_verse4}
-          customStyles="mb-2"
-        />
-        <Text
-          type="p"
-          textEng={"5. " + showFullPost?.thought_on_verse5}
-          textKor={"5. " + showFullPost?.thought_on_verse5}
-        />
-      </div>
-
-      {/* 5 Thoughts */}
-      <Text
-        type="h6"
-        textEng="Show Thanks"
-        textKor="감사 표현"
-        customStyles="mb-px"
-      />
-      <div className="flex flex-col w-full mt-6 px-5 py-5 bg-lightPurple mb-10">
-        <Text
-          type="p"
-          textEng={"1. " + showFullPost?.show_thanks1}
-          textKor={"1. " + showFullPost?.show_thanks1}
-          customStyles="mb-2"
-        />
-        <Text
-          type="p"
-          textEng={"2. " + showFullPost?.show_thanks2}
-          textKor={"2. " + showFullPost?.show_thanks2}
-          customStyles="mb-2"
-        />
-        <Text
-          type="p"
-          textEng={"3. " + showFullPost?.show_thanks3}
-          textKor={"3. " + showFullPost?.show_thanks3}
-        />
-      </div>
+      {editMode ? (
+            <PostEditForm
+            setShowErrorModal={setShowErrorModal}
+              showFullPost={showFullPost}
+              setShowFullPost={setShowFullPost}
+            />
+          ) : (
+            <ShowPost
+              setShowErrorModal={setShowErrorModal}
+              showFullPost={showFullPost}
+              setShowFullPost={setShowFullPost}
+            />
+          )}
     </motion.div>
   );
 };

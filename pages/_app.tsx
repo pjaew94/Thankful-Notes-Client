@@ -4,6 +4,8 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
 
+import '../styles/Calendar.css'
+
 import React from "react";
 import { GlobalProvider } from "../context/Provider";
 import { useRouter } from "next/router";

@@ -44,7 +44,7 @@ const DashboardContent: React.FC<IDashboardContent> = ({
 
   return (
     <div
-      className={`flex flex-col w-full overflow-x-hidden z-10 xl:px-10 py-10 xl:h-screen overflow-y-scroll ${
+      className={`flex flex-col w-full overflow-x-hidden z-10 xl:pl-16 xl:pr-3 py-10 xl:h-screen overflow-y-scroll ${
         showPostForm && "md:overflow-y-hidden"
       }`}
     >

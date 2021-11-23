@@ -211,7 +211,7 @@ const PostForm: React.FC<IPostFormFC> = ({setShowErrorModal, closeModal, setShow
 
 
 
-const PostFormField: React.FC<IPostFormField> = ({ register, step, field }) => {
+export const PostFormField: React.FC<IPostFormField> = ({ register, step, field }) => {
   return (
     <div className="flex w-full items-start mb-5">
       <Text type="p" textEng={step} textKor={step} customStyles="py-1 mr-4" />
@@ -226,7 +226,7 @@ const PostFormField: React.FC<IPostFormField> = ({ register, step, field }) => {
   );
 };
 
-const PostFormPrivateToggle: React.FC<IPostFormPrivateToggle> = ({
+export const PostFormPrivateToggle: React.FC<IPostFormPrivateToggle> = ({
   setIsPrivate,
   isPrivate,
 }) => {

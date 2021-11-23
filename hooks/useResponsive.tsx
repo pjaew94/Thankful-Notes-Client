@@ -26,11 +26,11 @@ const useResponsive = () => {
         if(typeof window !== 'undefined' && window.document && window.document.createElement && size.width) {
            if(size.width <= 767) {
                setCurrentSize({isMobile: true, isTablet: false, isDesktop: false, is4k: false})
-           } else if(size.width <= 1024){
+           } else if(size.width <= 1024 && size.width > 767){
             setCurrentSize({isMobile: false, isTablet: true, isDesktop: false, is4k: false})
-           }else if(size.width <= 1280){
+           }else if(size.width <= 1280 && size.width > 1024){
             setCurrentSize({isMobile: false, isTablet: false, isDesktop: true, is4k: false})
-           } else if(size.width <= 1536){
+           } else if(size.width >= 1536 ){
             setCurrentSize({isMobile: false, isTablet: false, isDesktop: false, is4k: true})
            }
         }

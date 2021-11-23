@@ -16,7 +16,7 @@ const TodaysPostReminder: React.FC<ITodaysPostReminder> = ({
   const { messageState } = useContext(GlobalContext);
 
   return (
-    <div className=" flex flex-col w-full px-6 py-6 border border-black items-center shadow-lg mb-10 md:flex-row md:justify-between">
+    <div className=" flex flex-col w-full px-6 py-6 border border-black items-center mb-10 md:flex-row md:justify-between">
       <div className="flex flex-col items-center md:w-7/12 xl:w-6/12 md:items-start">
         <Text
           type="h5"
@@ -45,14 +45,14 @@ const TodaysPostReminder: React.FC<ITodaysPostReminder> = ({
           onClick={() => router.push('/group')}
           textEng="See Group"
           textKor="그룹 보기"
-          customStyles='md:w-4/12 bg-black text-white hover:scale-105 md:h-20 xl:h-16'
+          customStyles='md:w-4/12 bg-black text-white md:h-20 xl:h-16'
         />
       ) : (
         <Button
           onClick={() => setShowPostForm(true)}
           textEng="Get Started"
           textKor="시작하기"
-          customStyles='md:w-4/12 bg-black text-white hover:scale-105  md:h-20 xl:h-16'
+          customStyles='md:w-4/12 bg-black text-white  md:h-20 xl:h-16'
         />
       )}
     </div>

@@ -12,15 +12,14 @@ const FormSubmitButton: React.FC<{
   return (
     <motion.button
       className={`w-full flex justify-center items-center text-center ${
-        black ? "bg-black" : "bg-hotPink"
-      } text-white  py-3 min-h-[60px] disabled:opacity-50 ${customStyles}`}
+        black ? "bg-black lg:hover:bg-gray-600" : "bg-hotPink"
+      } text-white  py-3 min-h-[60px] disabled:opacity-50  ${customStyles}`}
       type="submit"
       disabled={loading}
-      whileHover={{ backgroundColor: "gray" }}
       whileTap={{ scale: 0.95 }}
     >
       {loading ? (
-        <TripleBalls />
+        <TripleBalls white={true} />
       ) : (
         <Text type="button" textEng={textEng} textKor={textKor} />
       )}

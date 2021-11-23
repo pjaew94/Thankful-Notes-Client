@@ -16,6 +16,7 @@ import PostModalDesktop from "../../components/dashboard/PostModalDesktop";
 import FullPostInfoMobile from "./../../components/dashboard/FullPostInfoMobile.Mobile";
 import { IPost } from "../../context/types";
 import FullPostInfoDesktop from "./../../components/dashboard/FullPostInfoDesktop";
+import Calendar from "../../components/reusables/CalendarComponent";
 
 export type IShowFullPostState = IPost | null;
 
@@ -70,16 +71,18 @@ const Dashboard: React.FC = () => {
       className={`flex flex-col w-screen min-h-screen py-10 px-10 md:p-16 bg-white xl:p-0 xl:flex-row`}
     >
       {showPostSuccess && <PostSuccess />}
-      {currentSize.isMobile && (
+      {currentSize.isMobile && showFullPost ? (
         <FullPostInfoMobile
           showFullPost={showFullPost}
           setShowFullPost={setShowFullPost}
+          setShowErrorModal={setShowErrorModal}
         />
-      )}
+      ): null}
       {!currentSize.isMobile && showFullPost ?  (
         <FullPostInfoDesktop
           showFullPost={showFullPost}
           setShowFullPost={setShowFullPost}
+          setShowErrorModal={setShowErrorModal}
         />
       ) : null}
       {showPostForm && !currentSize.isMobile ? (
@@ -88,16 +91,17 @@ const Dashboard: React.FC = () => {
           setShowPostForm={setShowPostForm}
           setShowPostSuccess={setShowPostSuccess}
           setShowErrorModal={setShowErrorModal}
+          
         />
       ) : null}
 
-      {currentSize.isMobile || currentSize.isTablet ? (
+      {currentSize.isMobile || currentSize.isTablet || currentSize.isDesktop ? (
         <Header />
       ) : (
         <NavDesktop />
       )}
 
-      <div className="xl:w-6/12">
+      <div className="xl:w-9/16 2xl:w-[52%]">
         <DashboardContent
           setShowPostSuccess={setShowPostSuccess}
           showPostForm={showPostForm}
@@ -108,7 +112,10 @@ const Dashboard: React.FC = () => {
           setShowFullPost={setShowFullPost}
         />
       </div>
-      {currentSize.isDesktop && <div className="w-4/12"></div>}
+      {currentSize.isDesktop || currentSize.is4k ? <div className="sticky w-4/16 2xl:w-[30%] pl-3 pr-16 py-10">
+          
+          <Calendar />
+        </div> : null}
     </div>
   );
 };

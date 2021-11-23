@@ -49,33 +49,49 @@ const GroupMemberCard: React.FC<IGroupMemberCard> = ({
 }) => {
   const nameInitials = firstName!.slice(0, 1) + lastName!.slice(0, 1);
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <motion.div
-      className="flex w-full bg-pink px-5 py-5 group lg:hover:bg-darkPink"
+      className="flex w-full border border-gray-300 px-5 py-5 group lg:hover:shadow-md"
       variants={PostListCardsVariants}
     >
+      <div className="flex justify-center items-center h-14 w-14 bg-white lg:group-hover:bg-white rounded-full mr-3">
+        <Text
+          type="h4"
+          textEng={nameInitials}
+          textKor={nameInitials}
+          customStyles="font-bold text-black lg:group-hover:text-black"
+        />
+      </div>
 
-        <div className="flex justify-center items-center h-14 w-14 bg-darkPink lg:group-hover:bg-white rounded-full mr-3">
-          <Text
-            type="h4"
-            textEng={nameInitials}
-            textKor={nameInitials}
-            customStyles="font-bold text-pink lg:group-hover:text-black"
-          />
-        </div>
-        
-        <div className='flex flex-col justify-center'>
-        <Text type='p' textEng={username} textKor={username} customStyles='text-gray-400 font-bold lg:group-hover:text-black'  />
-        <Text type='p' textEng={firstName! +' ' +lastName!} textKor={firstName! + ' '+ lastName!} customStyles='text-gray-400 lg:group-hover:text-black'  />
-        </div>
+      <div className="flex flex-col justify-center">
+        <Text
+          type="p"
+          textEng={username}
+          textKor={username}
+          customStyles="text-gray-400 font-bold lg:group-hover:text-black"
+        />
+        <Text
+          type="p"
+          textEng={firstName! + " " + lastName!}
+          textKor={firstName! + " " + lastName!}
+          customStyles="text-gray-400 lg:group-hover:text-black"
+        />
+      </div>
 
-    <motion.button className={`h-full px-4 border border-black ml-auto cursor-pointer lg:hover:scale-105 `} onClick={()=> router.push('/' + username)}
-        whileTap={{scale: 0.95}}
-    >
-        <Text type='h4' textEng='Visit' textKor='Visit' customStyles='font-bold text-black' />
-    </motion.button>
+      <motion.button
+        className={`h-full px-4 border border-gray-300 ml-auto cursor-pointer lg:hover:scale-105 lg:hover:border-black `}
+        onClick={() => router.push("/" + username)}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Text
+          type="h4"
+          textEng="Visit"
+          textKor="Visit"
+          customStyles="font-bold text-black"
+        />
+      </motion.button>
     </motion.div>
   );
 };

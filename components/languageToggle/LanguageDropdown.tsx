@@ -6,8 +6,9 @@ import { switchLanguage } from "./../../context/actions/language";
 import { Transition } from "@headlessui/react";
 import { motion } from 'framer-motion';
 
-const LanguageDropdown: React.FC<{ customStyles?: string }> = ({
+const LanguageDropdown: React.FC<{ customStyles?: string, white?: boolean }> = ({
   customStyles,
+  white
 }) => {
   const { languageState, languageDispatch } = useContext(GlobalContext);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -26,7 +27,7 @@ const LanguageDropdown: React.FC<{ customStyles?: string }> = ({
           onClick={() => setShowDropdown(!showDropdown)}
           whileTap={{ scale: 0.95 }}
         >
-          <TranslateIcon className="w-5 h-6 text-black flex group-hover:text-gray-400" />
+          <TranslateIcon className={`w-5 h-6 ${white ? 'text-white' :'text-black'} flex group-hover:text-gray-400`} />
         </motion.button>
 
         {/* Dropdown Menu */}
@@ -42,27 +43,27 @@ const LanguageDropdown: React.FC<{ customStyles?: string }> = ({
           <div className=" flex flex-col absolute right-0 px-2 min-w-[10px] bg-white divide-y divide-gray-100 round-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             
               <button
-                className="px-2 py-2"
+                className="px-2 py-2 lg:hover:text-gray-300"
                 onClick={() => switchButtonClicked("eng")}
               >
                 <Text
                   type="span"
                   textEng="ENG"
                   textKor="영어"
-                  customStyles="hover:text-gray w-14"
+                  customStyles=" w-14"
                 />
               </button>
             
            
               <button
-                className="px-2 py-2"
+                className="px-2 py-2 lg:hover:text-gray-300"
                 onClick={() => switchButtonClicked("kor")}
               >
                 <Text
                   type="span"
                   textEng="KOR"
                   textKor="한국어"
-                  customStyles="hover:text-gray w-14"
+                  customStyles="w-14"
                 />
               </button>
             

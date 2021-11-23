@@ -87,7 +87,7 @@ const StatisticCard: React.FC<StatisticCard> = ({
 }) => {
   return (
     <div
-      className={`flex justify-between items-center w-full px-10 py-6 bg-${bgColor} cursor-pointer md:px-3 lg:hover:scale-110 lg:px-10 xl:px-10`}
+      className={`flex justify-between items-center w-full px-10 py-6 bg-${bgColor} cursor-pointer md:px-3 lg:hover:shadow-md lg:px-10 xl:px-5 2xl:px-10`}
     >
       <Image
         src={imgSrc}

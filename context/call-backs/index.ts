@@ -48,6 +48,31 @@ export const createPost = async(data: IPostForm): Promise<"success" | "error"> =
 }
 
 
+export const editPost = async(data: IPostForm, id: string): Promise<"success" | "error"> => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+
+
+    const body = JSON.stringify({ data });
+
+
+
+    const editedPost = await axios.put(`http://localhost:5000/api/posts/${id}`, body, config)
+
+
+    return 'success'
+  } catch (err: any) {
+    console.log(err.response.data)
+    return 'error'
+  }
+}
+
+
 
 
 export const setLocalStorage = (key: string, value: any) => {
@@ -66,5 +91,4 @@ export const getLocalStorage = (key: string, initialValue: any) => {
     console.log(err)
     return initialValue
   }
-
 }
