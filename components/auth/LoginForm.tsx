@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
     setIsLoading(true);
     await login(data.email, data.password)(authDispatch);
     await loadUser()(authDispatch);
-  
+    router.reload()
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full md:items-center md:bg-white md:px-10 md:py-10 md:rounded-lg md:my-10 md:shadow-lg">

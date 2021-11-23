@@ -17,6 +17,7 @@ import FullPostInfoMobile from "./../../components/dashboard/FullPostInfoMobile.
 import { IPost } from "../../context/types";
 import FullPostInfoDesktop from "./../../components/dashboard/FullPostInfoDesktop";
 import Calendar from "../../components/reusables/CalendarComponent";
+import Image from 'next/image'
 
 export type IShowFullPostState = IPost | null;
 
@@ -100,7 +101,6 @@ const Dashboard: React.FC = () => {
       ) : (
         <NavDesktop />
       )}
-
       <div className="xl:w-9/16 2xl:w-[52%]">
         <DashboardContent
           setShowPostSuccess={setShowPostSuccess}
@@ -112,8 +112,8 @@ const Dashboard: React.FC = () => {
           setShowFullPost={setShowFullPost}
         />
       </div>
-      {currentSize.isDesktop || currentSize.is4k ? <div className="sticky w-4/16 2xl:w-[30%] pl-3 pr-16 py-10">
-          
+      {currentSize.isDesktop || currentSize.is4k ? <div className="flex flex-col sticky h-screen w-4/16 2xl:w-[30%] pl-5 pr-10 py-10">
+          <Image src='/dashboardPic.svg' height='100%' width='100%' layout="responsive" objectFit="contain" alt='just some girl with puzzle piece' />
           <Calendar />
         </div> : null}
     </div>

@@ -20,7 +20,7 @@ const CalendarComponent:React.FC = () => {
 
 
     return (
-        <div className='flex flex-col w-full'>
+        <div className='mt-auto pb-8 flex flex-col w-full'>
             <Text type='h7' textEng='Calendar' textKor='달력' customStyles='mb-7' />
             <Calendar
                 calendarType="US"
