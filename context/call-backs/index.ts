@@ -1,6 +1,7 @@
 import axios, { Axios, AxiosResponse }  from "axios";
 import { json } from "stream/consumers";
 import { IPostForm } from './../../components/dashboard/PostForm';
+import { IForm } from './../../components/dashboard/JoinGroupForm';
 
 const setAuthToken = (token: string | null): void => {
   if (token) {
@@ -94,6 +95,21 @@ export const getLocalStorage = (key: string, initialValue: any) => {
 }
 
 
-export const joinGroup = (unique_group_name: string) => {
-  
+export const joinGroup = async (unique_group_name: IForm) => {
+
+
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify(unique_group_name)
+    const res = await axios.put('https://thankful-notes-server.herokuapp.com/api/user/join-group', body, config)
+    
+    return res
+  } catch (err: any) {
+      console.log(err.response.data);
+      return err.response.data
+  }
 }

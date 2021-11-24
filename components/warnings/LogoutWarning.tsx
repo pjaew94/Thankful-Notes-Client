@@ -41,13 +41,13 @@ const LogoutWarning: React.FC<ILogoutWarning> = ({ setShowLogoutWarning }) => {
             onClick={() => setShowLogoutWarning(false)}
             textEng="Stay"
             textKor="아니요"
-            customStyles="bg-black text-white w-5/12 hover:scale-105"
+            customStyles="bg-black text-white w-5/12"
           />
           <Button
             onClick={() => logoutFinal()}
             textEng="Logout"
             textKor="네"
-            customStyles="bg-white text-black border border-black w-5/12 hover:scale-105"
+            customStyles="bg-white text-black border border-black w-5/12 lg:hover:bg-black lg:hover:text-white"
           />
         </div>
       </div>

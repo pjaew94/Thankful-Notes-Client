@@ -80,9 +80,9 @@ const GroupMemberCard: React.FC<IGroupMemberCard> = ({
         />
       </div>
 
-      <motion.button
+      {/* <motion.button
         className={`h-full px-4 border border-gray-300 ml-auto cursor-pointer lg:hover:scale-105 lg:hover:border-black `}
-        onClick={() => router.push("/" + username)}
+        onClick={() => router.push("/profile/" + username)}
         whileTap={{ scale: 0.95 }}
       >
         <Text
@@ -91,7 +91,7 @@ const GroupMemberCard: React.FC<IGroupMemberCard> = ({
           textKor="Visit"
           customStyles="font-bold text-black"
         />
-      </motion.button>
+      </motion.button> */}
     </motion.div>
   );
 };
