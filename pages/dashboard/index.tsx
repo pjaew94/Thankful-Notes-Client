@@ -18,6 +18,7 @@ import { IPost } from "../../context/types";
 import FullPostInfoDesktop from "./../../components/dashboard/FullPostInfoDesktop";
 import Calendar from "../../components/reusables/CalendarComponent";
 import Image from 'next/image'
+import AboutUser from './../../components/dashboard/AboutUser';
 
 export type IShowFullPostState = IPost | null;
 
@@ -113,7 +114,7 @@ const Dashboard: React.FC = () => {
         />
       </div>
       {currentSize.isDesktop || currentSize.is4k ? <div className="flex flex-col sticky h-screen w-4/16 2xl:w-[30%] pl-5 pr-10 py-10">
-          <Image src='/dashboardPic.svg' height='100%' width='100%' layout="responsive" objectFit="contain" alt='just some girl with puzzle piece' />
+          <AboutUser />
           <Calendar />
         </div> : null}
     </div>

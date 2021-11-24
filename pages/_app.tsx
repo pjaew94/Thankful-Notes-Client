@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GlobalProvider>
           <Head>
             <title>Thankful Notes</title>
+            <link rel="shortcut icon" href="/favicon.png" />
           </Head>
           <Component {...pageProps} key={router.route} />
           <Nav />

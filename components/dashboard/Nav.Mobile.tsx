@@ -65,22 +65,7 @@ const Nav: React.FC = () => {
               }
             />
           </button>
-          <button className="flex items-center" onClick={() => navLinkClicked('/group')}>
-            <UserGroupIcon
-              className={`text-gray-400 h-5 w-5 mr-3  ${
-                navState.value === "Group" && "text-white"
-              }`}
-            />
-
-            <Text
-              type="nav"
-              textEng="Group"
-              textKor="그룹"
-              customStyles={
-                navState.value === "Group" ? "text-white" : "text-gray-400"
-              }
-            />
-          </button>
+          
         </div>
         
     

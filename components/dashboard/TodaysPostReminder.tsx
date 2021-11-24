@@ -43,9 +43,10 @@ const TodaysPostReminder: React.FC<ITodaysPostReminder> = ({
       {messageState?.loadedMessage?.message === null ? (
         <Button
           onClick={() => router.push('/group')}
-          textEng="See Group"
+          textEng="Come Back Tomorrow!"
           textKor="그룹 보기"
           customStyles='md:w-4/12 bg-black text-white md:h-20 xl:h-16'
+          disabled={true}
         />
       ) : (
         <Button

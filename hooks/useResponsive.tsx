@@ -30,7 +30,7 @@ const useResponsive = () => {
             setCurrentSize({isMobile: false, isTablet: true, isDesktop: false, is4k: false})
            }else if(size.width <= 1280 && size.width > 1024){
             setCurrentSize({isMobile: false, isTablet: false, isDesktop: true, is4k: false})
-           } else if(size.width >= 1536 ){
+           } else if(size.width >= 1280 ){
             setCurrentSize({isMobile: false, isTablet: false, isDesktop: false, is4k: true})
            }
         }
