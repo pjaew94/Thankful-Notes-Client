@@ -17,7 +17,6 @@ import FullPostInfoMobile from "./../../components/dashboard/FullPostInfoMobile.
 import { IPost } from "../../context/types";
 import FullPostInfoDesktop from "./../../components/dashboard/FullPostInfoDesktop";
 import Calendar from "../../components/reusables/CalendarComponent";
-import Image from 'next/image'
 import AboutUser from './../../components/dashboard/AboutUser';
 
 export type IShowFullPostState = IPost | null;
@@ -73,21 +72,21 @@ const Dashboard: React.FC = () => {
       className={`flex flex-col w-screen min-h-screen py-10 px-10 md:p-16 bg-white xl:p-0 xl:flex-row`}
     >
       {showPostSuccess && <PostSuccess />}
-      {currentSize.isMobile && showFullPost ? (
+      {(currentSize.sm || currentSize.md) && showFullPost ? (
         <FullPostInfoMobile
           showFullPost={showFullPost}
           setShowFullPost={setShowFullPost}
           setShowErrorModal={setShowErrorModal}
         />
       ): null}
-      {!currentSize.isMobile && showFullPost ?  (
+      {(!currentSize.sm || currentSize.md) && showFullPost ?  (
         <FullPostInfoDesktop
           showFullPost={showFullPost}
           setShowFullPost={setShowFullPost}
           setShowErrorModal={setShowErrorModal}
         />
       ) : null}
-      {showPostForm && !currentSize.isMobile ? (
+      {showPostForm && (currentSize.sm || currentSize.md) ? (
         <PostModalDesktop
           showPostForm={showPostForm}
           setShowPostForm={setShowPostForm}
@@ -97,7 +96,7 @@ const Dashboard: React.FC = () => {
         />
       ) : null}
 
-      {currentSize.isMobile || currentSize.isTablet || currentSize.isDesktop ? (
+      {currentSize.sm || currentSize.md || currentSize.lg ? (
         <Header />
       ) : (
         <NavDesktop />
@@ -113,9 +112,9 @@ const Dashboard: React.FC = () => {
           setShowFullPost={setShowFullPost}
         />
       </div>
-      {currentSize.isDesktop || currentSize.is4k ? <div className="flex flex-col sticky h-screen w-4/16 2xl:w-[30%] pl-5 pr-10 py-10">
+      {currentSize.xl || currentSize.xxl ? <div className="flex flex-col sticky h-screen w-4/16 2xl:w-[30%] pl-5 pr-10 py-10">
           <AboutUser />
-          <Calendar />
+          {/* <Calendar /> */}
         </div> : null}
     </div>
   );

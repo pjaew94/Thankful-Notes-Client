@@ -29,9 +29,10 @@ const Loading: React.FC = () => {
 
           <Image
             src="/homeLoadingManWoman.svg"
-            height={currentSize.isDesktop || currentSize.is4k ? 280 : 180}
-            width={currentSize.isDesktop || currentSize.is4k ? 280 : 180}
+            height={currentSize.lg || currentSize.xl || currentSize.xxl ? 280 : 180}
+            width={currentSize.lg || currentSize.xl || currentSize.xxl ? 280 : 180}
             alt="man with a puzzle for no reason"
+            priority={true}
           />
   
         </div>

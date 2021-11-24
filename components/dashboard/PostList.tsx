@@ -50,10 +50,10 @@ const PostList: React.FC<IPostList> = ({
           type="p"
           textEng="Name"
           textKor="이름"
-          customStyles={!currentSize.isMobile ? "col-span-2" : "col-span-6"}
+          customStyles={!currentSize.sm && !currentSize.md ? "col-span-2" : "col-span-6"}
         />
 
-        {!currentSize.isMobile ? (
+        {!currentSize.sm && !currentSize.md ? (
           <Text
             type="p"
             textEng="Message"
@@ -62,7 +62,7 @@ const PostList: React.FC<IPostList> = ({
           />
         ) : null}
 
-        {!currentSize.isMobile ? (
+        {!currentSize.sm && !currentSize.md ? (
           <Text
             type="p"
             textEng="Preview"
@@ -75,13 +75,13 @@ const PostList: React.FC<IPostList> = ({
           type="p"
           textEng="Date Posted"
           textKor="올린 날"
-          customStyles={!currentSize.isMobile ? "col-span-2" : "col-span-7"}
+          customStyles={!currentSize.sm && !currentSize.md ? "col-span-2" : "col-span-7"}
         />
         <Text
           type="p"
           textEng="Private"
           textKor="비공개"
-          customStyles={!currentSize.isMobile ? "col-span-1" : "col-span-3"}
+          customStyles={!currentSize.sm && !currentSize.md ? "col-span-1" : "col-span-3"}
         />
       </div>
 
@@ -182,7 +182,7 @@ const PostCard: React.FC<PostCard> = ({
     >
       <div
         className={`flex break-words ${
-          !currentSize.isMobile ? "col-span-2" : "col-span-6"
+          !currentSize.sm && !currentSize.md ? "col-span-2" : "col-span-6"
         } `}
       >
         <Text
@@ -193,13 +193,13 @@ const PostCard: React.FC<PostCard> = ({
         />
       </div>
 
-      {!currentSize.isMobile ? (
+      {!currentSize.sm && !currentSize.md ? (
         <div className="flex col-span-5">
           <Text type="p" textEng={msgEngPreview} textKor={msgKorPreview} />
         </div>
       ) : null}
 
-      {!currentSize.isMobile ? (
+      {!currentSize.sm && !currentSize.md ? (
         <div className="flex col-span-5">
           <Text type="p" textEng={previewSlice} textKor={previewSlice} />
         </div>
@@ -207,14 +207,14 @@ const PostCard: React.FC<PostCard> = ({
 
       <div
         className={`flex ${
-          !currentSize.isMobile ? "col-span-2 " : "col-span-7"
+          !currentSize.sm && !currentSize.md ? "col-span-2 " : "col-span-7"
         }`}
       >
         <Text type="p" textEng={dateChecked} textKor={dateChecked} />
       </div>
       <div
         className={`flex ${
-          !currentSize.isMobile ? "col-span-1" : "col-span-3"
+          !currentSize.sm && !currentSize.md ? "col-span-1" : "col-span-3"
         } `}
       >
         {isPrivateString}

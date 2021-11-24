@@ -18,6 +18,7 @@ const PostSuccess: React.FC = () => {
           height={300}
           width={200}
           alt="man with a puzzle for no reason"
+          priority={true}
         />
 
         <Text type="h3" textEng="Success!" textKor="성공!" />

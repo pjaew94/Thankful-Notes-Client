@@ -25,7 +25,6 @@ const StatInfoMobile: React.FC<IStatInfoMobile> = ({
 }) => {
   const controls = useAnimation();
 
-  const { postsState, groupState } = useContext(GlobalContext);
 
   useEffect(() => {
     if (statistic !== null) {

@@ -29,6 +29,7 @@ const Loading: NextPage = () => {
           height={300}
           width={200}
           alt="man with a puzzle for no reason"
+          priority={true}
         />
 
         <Text type="h3" textEng="Welcome!" textKor="어서 오세요!" />

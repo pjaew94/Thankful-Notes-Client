@@ -48,7 +48,7 @@ const DashboardContent: React.FC<IDashboardContent> = ({
         showPostForm && "md:overflow-y-hidden"
       }`}
     >
-      {currentSize.isMobile && (
+      {currentSize.sm || currentSize.md ? (
         <PostModalMobile
           setShowPostForm={setShowPostForm}
           showPostForm={showPostForm}
@@ -56,27 +56,29 @@ const DashboardContent: React.FC<IDashboardContent> = ({
           showErrorModal={showErrorModal}
           setShowErrorModal={setShowErrorModal}
         />
-      )}
-      {currentSize.isMobile && (
+      ) : null}
+      {currentSize.sm ? (
         <StatInfoMobile
           setStatistic={setStatistic}
           statistic={statistic}
           showFullPost={showFullPost}
           setShowFullPost={setShowFullPost}
         />
-      )}
+      ) : null}
+
+
       {/* Dashboard left field content */}
       <div className="flex flex-col w-full">
         <TodaysPostReminder setShowPostForm={setShowPostForm} />
         {authState?.user && <Statistics setStatistic={setStatistic} />}
-        {!currentSize.isMobile && (
+        {!currentSize.sm ? (
           <StatInfoDesktop
             statistic={statistic}
             setStatistic={setStatistic}
             showFullPost={showFullPost}
             setShowFullPost={setShowFullPost}
           />
-        )}
+        ): null}
       </div>
 
       {/* Dashboard right field content */}

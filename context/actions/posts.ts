@@ -35,3 +35,4 @@ export const getGroupPosts = (groupId: string) => async(dispatch: CallableFuncti
         console.log(err.response)
     }
 }
+

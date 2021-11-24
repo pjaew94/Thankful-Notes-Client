@@ -21,3 +21,4 @@ export const getGroupBasicInfo = () => async (dispatch: CallableFunction) => {
         console.log(err.response);
     }
 }
+

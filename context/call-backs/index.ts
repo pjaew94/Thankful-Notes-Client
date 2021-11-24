@@ -92,3 +92,8 @@ export const getLocalStorage = (key: string, initialValue: any) => {
     return initialValue
   }
 }
+
+
+export const joinGroup = (unique_group_name: string) => {
+  
+}
